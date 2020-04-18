@@ -22,7 +22,6 @@ class RecordSoundViewController: UIViewController, AVAudioRecorderDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
         stopRecordButton.isEnabled = false
     }
 
@@ -64,5 +63,12 @@ class RecordSoundViewController: UIViewController, AVAudioRecorderDelegate {
         }
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "stopRecording" {
+            let playSoundsVC = segue.destination as! PlaySoundViewController
+            let recordedAudio = sender as! URL
+            playSoundsVC.recordedAudioURL = recordedAudio
+        }
+    }
 }
 
