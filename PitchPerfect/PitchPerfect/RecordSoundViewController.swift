@@ -68,7 +68,7 @@ class RecordSoundViewController: UIViewController, AVAudioRecorderDelegate {
     }
     
     func setButtonState(labelString: String, isRecording: Bool){
-        recordingLabel.text = "Tap to Record"
+        recordingLabel.text = labelString
         recordButton.isEnabled = !isRecording
         stopRecordButton.isEnabled = isRecording
     }
