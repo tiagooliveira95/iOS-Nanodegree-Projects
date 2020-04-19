@@ -13,6 +13,7 @@
 		E86EF59B244BB18400F628F3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E86EF599244BB18400F628F3 /* Main.storyboard */; };
 		E86EF59D244BB18700F628F3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E86EF59C244BB18700F628F3 /* Assets.xcassets */; };
 		E86EF5A0244BB18700F628F3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E86EF59E244BB18700F628F3 /* LaunchScreen.storyboard */; };
+		E86EF5A8244CC9E100F628F3 /* Meme.swift in Sources */ = {isa = PBXBuildFile; fileRef = E86EF5A7244CC9E100F628F3 /* Meme.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		E86EF59C244BB18700F628F3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E86EF59F244BB18700F628F3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E86EF5A1244BB18700F628F3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E86EF5A7244CC9E100F628F3 /* Meme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Meme.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +65,7 @@
 				E86EF59C244BB18700F628F3 /* Assets.xcassets */,
 				E86EF59E244BB18700F628F3 /* LaunchScreen.storyboard */,
 				E86EF5A1244BB18700F628F3 /* Info.plist */,
+				E86EF5A7244CC9E100F628F3 /* Meme.swift */,
 			);
 			path = MemeMe;
 			sourceTree = "<group>";
@@ -139,6 +142,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E86EF598244BB18400F628F3 /* ViewController.swift in Sources */,
+				E86EF5A8244CC9E100F628F3 /* Meme.swift in Sources */,
 				E86EF594244BB18400F628F3 /* AppDelegate.swift in Sources */,
 				E86EF596244BB18400F628F3 /* SceneDelegate.swift in Sources */,
 			);
@@ -287,6 +291,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = PWGXY8Q8QJ;
 				INFOPLIST_FILE = MemeMe/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -305,6 +310,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = PWGXY8Q8QJ;
 				INFOPLIST_FILE = MemeMe/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

@@ -10,6 +10,10 @@ import UIKit
 
 class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
 
+    
+    let DEFAULT_TOP_TEXT = "TOP"
+    let DEFAULT_BOTTOM_TEXT = "BOTTOM"
+    
     // Variable to check if the user has rewritten the default text
     // when set to true, the text wont get cleared when user touches the text field
     var wasTopDefaultTextOverwritten = false
@@ -24,10 +28,13 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     // MARK: Outlets
     
+    @IBOutlet weak var shareButton: UIBarButtonItem!
     @IBOutlet weak var imagePickerView: UIImageView!
     @IBOutlet weak var cameraButton: UIBarButtonItem!
     @IBOutlet weak var topTextField: UITextField!
     @IBOutlet weak var bottomTextField: UITextField!
+    @IBOutlet weak var navigationBar: UINavigationBar!
+    @IBOutlet weak var toolbar: UIToolbar!
     
 
     //MARK: Lifecycles
@@ -38,8 +45,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     override func viewDidLoad() {
-        setTextStyles(topTextField, "Top")
-        setTextStyles(bottomTextField, "Bottom")
+        setTextStyles(topTextField, DEFAULT_TOP_TEXT)
+        setTextStyles(bottomTextField, DEFAULT_BOTTOM_TEXT)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -61,11 +68,14 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         print("image recived")
         
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+            //Enable share button
+            shareButton.isEnabled = true
             imagePickerView.image = image
-        }else {
+        } else {
+            //Disable share button
+            shareButton.isEnabled = false
             print("failed to set image")
         }
-        
         dismiss(animated: true, completion: nil)
     }
       
@@ -75,19 +85,62 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     //MARK: IB Actions
     @IBAction func pickImage(_ sender: Any) {
-        //Shows image picker
-        let pickerController = UIImagePickerController()
-        pickerController.delegate = self
-        pickerController.sourceType = .photoLibrary
-        present(pickerController, animated: true, completion: nil)
+        initPicker(.photoLibrary)
+    }
+    
+    @IBAction func pickAnImageFromCamera(_ sender: Any) {
+        initPicker(.camera)
+    }
+    
+    func initPicker(_ src: UIImagePickerController.SourceType){
+        let imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
+        imagePicker.sourceType = src
+        present(imagePicker, animated: true, completion: nil)
+    }
+    
+    @IBAction func save() {
+        // Create the meme
+        let memedImage = generateMemedImage()
+        let activityViewController = UIActivityViewController(activityItems: [memedImage], applicationActivities: [])
+
+        activityViewController.completionWithItemsHandler = { activity, success, items, error in
+        if success {
+            let _ = Meme(
+                topText: self.topTextField.text!,
+                bottomText: self.bottomTextField.text!,
+                originalImage: self.imagePickerView.image!,
+                memedImage: memedImage
+            )}
+        }
+        present(activityViewController,animated: true,completion: nil)
     }
     
     
-    @IBAction func pickAnImageFromCamera(_ sender: Any) {
+    //MARK: Methods
+    
+    func generateMemedImage() -> UIImage {
 
-        let imagePicker = UIImagePickerController()
-        imagePicker.delegate = self
-        present(imagePicker, animated: true, completion: nil)
+        // Hide toolbar and navbar
+        toggleNavigationAndToolbar(true)
+        
+        // Render view to an image
+        UIGraphicsBeginImageContext(self.view.frame.size)
+        view.drawHierarchy(in: self.view.frame, afterScreenUpdates: true)
+        let memedImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()!
+        UIGraphicsEndImageContext()
+
+        // Show toolbar and navbar
+        toggleNavigationAndToolbar(false)
+
+        return memedImage
+    }
+    
+    
+    //Hides or shows toolbar and navigation bar
+    func toggleNavigationAndToolbar(_ toggle: Bool){
+        self.toolbar.isHidden = toggle
+        self.navigationBar.isHidden = toggle
     }
     
 
