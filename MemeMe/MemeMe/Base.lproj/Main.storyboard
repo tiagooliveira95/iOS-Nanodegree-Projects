@@ -36,7 +36,7 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vgd-qp-5YF">
-                                <rect key="frame" x="0.0" y="116" width="414" height="18.5"/>
+                                <rect key="frame" x="0.0" y="151" width="414" height="18.5"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
@@ -47,7 +47,7 @@
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ylo-xM-gG6">
                                 <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                                 <items>
-                                    <navigationItem title="Title" id="mti-cj-BLp">
+                                    <navigationItem title="MemeMe" id="mti-cj-BLp">
                                         <barButtonItem key="leftBarButtonItem" enabled="NO" title="Share" image="square.and.arrow.up" catalog="system" id="vSW-PY-Hlo">
                                             <connections>
                                                 <action selector="save" destination="BYZ-38-t0r" id="XVI-4u-sJ1"/>
@@ -65,7 +65,7 @@
                             <constraint firstItem="ylo-xM-gG6" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Mkb-NS-S19"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="ylo-xM-gG6" secondAttribute="trailing" id="UtG-sf-iTz"/>
                             <constraint firstItem="ggC-hn-2Yy" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="Y1Y-GA-Oct"/>
-                            <constraint firstItem="vgd-qp-5YF" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="72" id="Zuf-iP-To3"/>
+                            <constraint firstItem="vgd-qp-5YF" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="107" id="Zuf-iP-To3"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="aVj-5I-hLw" secondAttribute="trailing" id="dbb-D0-J0D"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="f9t-mX-5x4" secondAttribute="bottom" constant="102" id="fFU-D3-opM"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="vgd-qp-5YF" secondAttribute="trailing" id="gbC-w0-gQz"/>
