@@ -68,6 +68,7 @@
 		E86EF592244BB18400F628F3 /* MemeMe */ = {
 			isa = PBXGroup;
 			children = (
+				E86EF5D8244FA2C600F628F3 /* Constants */,
 				E86EF5CF244E154D00F628F3 /* Views */,
 				E86EF5CC244E0AC400F628F3 /* Controllers */,
 				E86EF593244BB18400F628F3 /* AppDelegate.swift */,
@@ -78,7 +79,6 @@
 				E86EF59E244BB18700F628F3 /* LaunchScreen.storyboard */,
 				E86EF5A1244BB18700F628F3 /* Info.plist */,
 				E86EF5A7244CC9E100F628F3 /* Meme.swift */,
-				E86EF5D2244E45BA00F628F3 /* Constants.swift */,
 			);
 			path = MemeMe;
 			sourceTree = "<group>";
@@ -99,6 +99,14 @@
 				E86EF5D0244E156600F628F3 /* MemeCollectionViewCell.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		E86EF5D8244FA2C600F628F3 /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				E86EF5D2244E45BA00F628F3 /* Constants.swift */,
+			);
+			path = Constants;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
