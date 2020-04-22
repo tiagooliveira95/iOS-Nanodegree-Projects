@@ -10,17 +10,19 @@ import UIKit
 
 class MemeCollectionViewController: UICollectionViewController  {
     
+    @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
+
+    
     var memes: [Meme]! {
         let object = UIApplication.shared.delegate
         let appDelegate = object as! AppDelegate
         return appDelegate.memes
     }
     
-    @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
-        
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        collectionView?.reloadData()
     }
     
     //gets items count
@@ -29,17 +31,17 @@ class MemeCollectionViewController: UICollectionViewController  {
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TODO", for: indexPath) as! MemeCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Identifiers.memeCollectionViewCell, for: indexPath) as! MemeCollectionViewCell
         cell.setMeme(memes[indexPath.row])
         return cell
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "TODO", sender: memes[indexPath.row].memedImage)
+        performSegue(withIdentifier: Segues.memeDisplayFromCollection, sender: memes[indexPath.row].memedImage)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "TODO" {
+        if segue.identifier == Segues.memeDisplayFromCollection {
             let viewController = segue.destination as! MemeDisplayViewController
             viewController.memedImage.image = sender as? UIImage
         }

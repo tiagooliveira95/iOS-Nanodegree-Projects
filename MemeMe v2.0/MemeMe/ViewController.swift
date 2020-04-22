@@ -65,7 +65,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     //MARK:ImagePicker Delegate
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        print("image recived")
         
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             //Enable share button

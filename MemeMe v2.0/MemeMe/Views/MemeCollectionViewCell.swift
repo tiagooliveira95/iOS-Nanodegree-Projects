@@ -12,7 +12,7 @@ class MemeCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var cellImageView: UIImageView!
     
-    //TODO
+    //TODO set image view dinamicly to fit all screens
     
     func setMeme(_ meme: Meme){
         //TODO
