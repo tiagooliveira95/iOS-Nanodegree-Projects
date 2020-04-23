@@ -11,11 +11,8 @@ import UIKit
 class MemeCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var cellImageView: UIImageView!
-    
-    //TODO set image view dinamicly to fit all screens
-    
+        
     func setMeme(_ meme: Meme){
-        //TODO
         cellImageView.image = meme.memedImage
     }
 }

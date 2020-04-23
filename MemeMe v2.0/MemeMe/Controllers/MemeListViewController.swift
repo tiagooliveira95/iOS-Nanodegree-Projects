@@ -20,11 +20,12 @@ class MemeListViewController : UITableViewController{
     
     override func viewWillAppear(_ animated: Bool) {
            super.viewWillAppear(animated)
-           tableView?.reloadData()
-       }
+        // ImageView Height + MarginTop + MarginBottom
+        tableView.rowHeight = 128 + 16 + 16
+        tableView?.reloadData()
+    }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print("memes count \(memes.count)")
         return memes.count
     }
     

@@ -20,7 +20,11 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
                                 <items>
                                     <navigationItem title="Your meme" id="7XI-Wg-1Qn">
-                                        <barButtonItem key="rightBarButtonItem" title="Cancel" id="SRs-hl-iV1"/>
+                                        <barButtonItem key="rightBarButtonItem" title="Cancel" id="SRs-hl-iV1">
+                                            <connections>
+                                                <action selector="onCloseNavigationButtonClicked:" destination="A7L-Uv-Nqa" id="hTi-uU-N11"/>
+                                            </connections>
+                                        </barButtonItem>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
@@ -64,21 +68,21 @@
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="151"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="jIL-h7-cAa">
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="jIL-h7-cAa">
                                             <rect key="frame" x="16" y="16" width="128" height="128"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="128" id="GxP-d2-sZY"/>
                                                 <constraint firstAttribute="width" constant="128" id="oCy-F0-nKu"/>
                                             </constraints>
                                         </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C05-5r-OtZ">
-                                            <rect key="frame" x="157" y="118" width="42" height="21"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bottom Text" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C05-5r-OtZ">
+                                            <rect key="frame" x="157" y="107" width="93" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ugy-4q-bi4">
-                                            <rect key="frame" x="157" y="16" width="42" height="21"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Top Text" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ugy-4q-bi4">
+                                            <rect key="frame" x="157" y="27" width="65" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -87,10 +91,10 @@
                                     <constraints>
                                         <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="C05-5r-OtZ" secondAttribute="trailing" constant="20" symbolic="YES" id="3jE-Da-AWD"/>
                                         <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Ugy-4q-bi4" secondAttribute="trailing" constant="20" symbolic="YES" id="BUs-BI-ozZ"/>
-                                        <constraint firstItem="C05-5r-OtZ" firstAttribute="top" secondItem="Ugy-4q-bi4" secondAttribute="bottom" constant="81" id="IBY-GL-ziE"/>
+                                        <constraint firstItem="C05-5r-OtZ" firstAttribute="bottom" secondItem="jIL-h7-cAa" secondAttribute="bottom" constant="-16" id="IBY-GL-ziE"/>
                                         <constraint firstItem="jIL-h7-cAa" firstAttribute="top" secondItem="nXh-0k-hJb" secondAttribute="top" constant="16" id="T0h-T9-r9W"/>
                                         <constraint firstItem="C05-5r-OtZ" firstAttribute="leading" secondItem="jIL-h7-cAa" secondAttribute="trailing" constant="13" id="ZWt-ez-JVr"/>
-                                        <constraint firstItem="Ugy-4q-bi4" firstAttribute="top" secondItem="nXh-0k-hJb" secondAttribute="topMargin" constant="5" id="gFs-ef-RPT"/>
+                                        <constraint firstItem="Ugy-4q-bi4" firstAttribute="top" secondItem="nXh-0k-hJb" secondAttribute="topMargin" constant="16" id="gFs-ef-RPT"/>
                                         <constraint firstItem="Ugy-4q-bi4" firstAttribute="leading" secondItem="jIL-h7-cAa" secondAttribute="trailing" constant="13" id="qAO-5d-KSY"/>
                                         <constraint firstItem="jIL-h7-cAa" firstAttribute="leading" secondItem="nXh-0k-hJb" secondAttribute="leading" constant="16" id="tah-z7-K6g"/>
                                     </constraints>
@@ -326,7 +330,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="nQ7-RG-c9h"/>
+        <segue reference="cqR-NP-bJ4"/>
         <segue reference="YLs-F2-GxG"/>
     </inferredMetricsTieBreakers>
     <resources>
