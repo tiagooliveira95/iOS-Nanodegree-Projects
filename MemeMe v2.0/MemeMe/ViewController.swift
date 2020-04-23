@@ -112,8 +112,10 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                 memedImage: memedImage
             )
             (UIApplication.shared.delegate as! AppDelegate).memes.append(meme)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "load"), object: nil)
             }
         }
+        
         present(activityViewController,animated: true,completion: nil)
     }
     

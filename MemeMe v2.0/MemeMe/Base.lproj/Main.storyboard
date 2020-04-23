@@ -52,7 +52,7 @@
             </objects>
             <point key="canvasLocation" x="-21772" y="-621"/>
         </scene>
-        <!--Meme List View Controller-->
+        <!--MemeMe-->
         <scene sceneID="lXR-Tz-4JW">
             <objects>
                 <tableViewController id="moX-FL-15x" customClass="MemeListViewController" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
@@ -111,7 +111,7 @@
                             <outlet property="delegate" destination="moX-FL-15x" id="cg0-Fc-j16"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="L8o-9P-BUi">
+                    <navigationItem key="navigationItem" title="MemeMe" id="L8o-9P-BUi">
                         <barButtonItem key="rightBarButtonItem" image="plus" catalog="system" id="P46-bg-sFW">
                             <connections>
                                 <segue destination="BYZ-38-t0r" kind="presentation" id="nQ7-RG-c9h"/>
@@ -166,7 +166,7 @@
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ylo-xM-gG6">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
                                 <items>
-                                    <navigationItem title="MemeMe" id="mti-cj-BLp">
+                                    <navigationItem title="Meme Creator" id="mti-cj-BLp">
                                         <barButtonItem key="leftBarButtonItem" enabled="NO" title="Share" image="square.and.arrow.up" catalog="system" id="vSW-PY-Hlo">
                                             <connections>
                                                 <action selector="save" destination="BYZ-38-t0r" id="XVI-4u-sJ1"/>
@@ -246,7 +246,7 @@
             </objects>
             <point key="canvasLocation" x="-23559" y="-621"/>
         </scene>
-        <!--Meme Collection View Controller-->
+        <!--MemeMe-->
         <scene sceneID="S3k-1S-CXQ">
             <objects>
                 <collectionViewController id="dv2-NE-YGD" customClass="MemeCollectionViewController" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
@@ -254,7 +254,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="u9I-CX-q8p">
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="u9I-CX-q8p">
                             <size key="itemSize" width="128" height="128"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -279,7 +279,6 @@
                                     <constraints>
                                         <constraint firstAttribute="trailing" secondItem="Frn-JL-3XB" secondAttribute="trailing" id="Eqf-RC-xga"/>
                                         <constraint firstItem="Frn-JL-3XB" firstAttribute="top" secondItem="bJJ-AD-4hn" secondAttribute="top" id="Hmh-R6-Wpd"/>
-                                        <constraint firstAttribute="bottom" secondItem="Frn-JL-3XB" secondAttribute="bottom" id="aDK-pt-jQq"/>
                                         <constraint firstItem="Frn-JL-3XB" firstAttribute="leading" secondItem="bJJ-AD-4hn" secondAttribute="leading" id="vtf-3i-bop"/>
                                     </constraints>
                                 </collectionViewCellContentView>
@@ -293,7 +292,7 @@
                             <outlet property="delegate" destination="dv2-NE-YGD" id="ZMG-8n-bxY"/>
                         </connections>
                     </collectionView>
-                    <navigationItem key="navigationItem" id="GSz-qk-tcw">
+                    <navigationItem key="navigationItem" title="MemeMe" id="GSz-qk-tcw">
                         <barButtonItem key="rightBarButtonItem" image="plus" catalog="system" id="cVU-58-gYT">
                             <connections>
                                 <segue destination="BYZ-38-t0r" kind="presentation" id="cqR-NP-bJ4"/>

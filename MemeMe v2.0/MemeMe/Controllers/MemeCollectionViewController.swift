@@ -18,7 +18,7 @@ class MemeCollectionViewController: UICollectionViewController  {
         let appDelegate = object as! AppDelegate
         return appDelegate.memes
     }
-    
+        
     
     override func viewDidAppear(_ animated: Bool) {
         //sets width of image to handle multiple display widths
@@ -26,9 +26,15 @@ class MemeCollectionViewController: UICollectionViewController  {
         let dimension = (view.frame.size.width - (2 * space)) / 3.0
         flowLayout.minimumInteritemSpacing = space
         flowLayout.minimumLineSpacing = space
-        
         flowLayout.itemSize = CGSize(width: dimension, height: dimension)
+        NotificationCenter.default.addObserver(self, selector: #selector(loadList(notification:)), name:NSNotification.Name(rawValue: "load"), object: nil)
+
     }
+    
+    @objc func loadList(notification: NSNotification){
+        self.collectionView.reloadData()
+    }
+    
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
