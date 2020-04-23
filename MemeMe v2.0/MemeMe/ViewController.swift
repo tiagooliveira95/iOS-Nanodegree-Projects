@@ -120,6 +120,11 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     
+    @IBAction func onCancelButtonClickListener(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    
     //MARK: Methods
     
     func generateMemedImage() -> UIImage {

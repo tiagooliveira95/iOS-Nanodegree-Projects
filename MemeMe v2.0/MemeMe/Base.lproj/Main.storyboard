@@ -119,6 +119,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="memeTableView" destination="pF5-v2-N78" id="SEG-rk-LN7"/>
                         <segue destination="A7L-Uv-Nqa" kind="presentation" identifier="MemeDisplayListTableSegue" id="tjI-GA-guU"/>
                     </connections>
                 </tableViewController>
@@ -145,7 +146,11 @@
                                             <action selector="pickImage:" destination="BYZ-38-t0r" id="Bnw-Z2-fvP"/>
                                         </connections>
                                     </barButtonItem>
-                                    <barButtonItem title="Camera" id="pYN-eu-Qgz"/>
+                                    <barButtonItem title="Camera" id="pYN-eu-Qgz">
+                                        <connections>
+                                            <action selector="pickAnImageFromCamera:" destination="BYZ-38-t0r" id="cki-i6-Jlo"/>
+                                        </connections>
+                                    </barButtonItem>
                                 </items>
                             </toolbar>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="f9t-mX-5x4">
@@ -170,6 +175,11 @@
                                         <barButtonItem key="leftBarButtonItem" enabled="NO" title="Share" image="square.and.arrow.up" catalog="system" id="vSW-PY-Hlo">
                                             <connections>
                                                 <action selector="save" destination="BYZ-38-t0r" id="XVI-4u-sJ1"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" title="Cancel" id="hyk-sJ-WA2">
+                                            <connections>
+                                                <action selector="onCancelButtonClickListener:" destination="BYZ-38-t0r" id="XFy-K6-wMu"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
@@ -329,8 +339,8 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="cqR-NP-bJ4"/>
-        <segue reference="YLs-F2-GxG"/>
+        <segue reference="nQ7-RG-c9h"/>
+        <segue reference="tjI-GA-guU"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="list.dash" catalog="system" width="128" height="85"/>
