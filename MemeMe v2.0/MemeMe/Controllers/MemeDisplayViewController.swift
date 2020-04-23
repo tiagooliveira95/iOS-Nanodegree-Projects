@@ -18,4 +18,8 @@ class MemeDisplayViewController : UIViewController {
         super.viewDidLoad()
         self.memedImage.image = image
     }
+    
+    @IBAction func onCloseNavigationButtonClicked(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
 }
