@@ -19,6 +19,16 @@ class MemeCollectionViewController: UICollectionViewController  {
         return appDelegate.memes
     }
     
+    
+    override func viewDidAppear(_ animated: Bool) {
+        //sets width of image to handle multiple display widths
+        let space:CGFloat = 3.0
+        let dimension = (view.frame.size.width - (2 * space)) / 3.0
+        flowLayout.minimumInteritemSpacing = space
+        flowLayout.minimumLineSpacing = space
+        
+        flowLayout.itemSize = CGSize(width: dimension, height: dimension)
+    }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -43,8 +53,7 @@ class MemeCollectionViewController: UICollectionViewController  {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == Segues.memeDisplayFromCollection {
             let viewController = segue.destination as! MemeDisplayViewController
-            viewController.memedImage.image = sender as? UIImage
+            viewController.image = sender as? UIImage
         }
     }
-    
 }

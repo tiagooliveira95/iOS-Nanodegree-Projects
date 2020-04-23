@@ -8,4 +8,5 @@
 
 struct Identifiers {
     static let memeCollectionViewCell = "MemeCollectionViewCell"
+    static let memeTableViewCellIdentifier = "MemeListViewCell"
 }
