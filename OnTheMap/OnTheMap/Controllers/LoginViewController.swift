@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LoginViewController : UIViewController{
+class LoginViewController: UIViewController {
     
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
@@ -28,6 +28,16 @@ class LoginViewController : UIViewController{
             return
         }
         //TODO proceed with login
+        AuthProvider.login(email: email, password: password) { (isLoggedIn, error) in
+            if error != nil {
+                print("error logging in \(String(describing: error?.localizedDescription))")
+                return
+            }
+            if isLoggedIn == false {
+                print("loggedIn")
+                return
+            }
+        }
     }
    
     
