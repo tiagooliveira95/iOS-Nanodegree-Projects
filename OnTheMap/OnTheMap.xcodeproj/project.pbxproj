@@ -14,6 +14,8 @@
 		E8C4D0F52454ACEC00616DB7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E8C4D0F42454ACEC00616DB7 /* Assets.xcassets */; };
 		E8C4D0F82454ACEC00616DB7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E8C4D0F62454ACEC00616DB7 /* LaunchScreen.storyboard */; };
 		E8C4D10124550E8300616DB7 /* TabBarNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C4D10024550E8300616DB7 /* TabBarNavigationController.swift */; };
+		E8C4D1032455F23200616DB7 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C4D1022455F23200616DB7 /* LoginViewController.swift */; };
+		E8C4D1072455F70E00616DB7 /* ServerConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C4D1062455F70E00616DB7 /* ServerConstants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +28,8 @@
 		E8C4D0F72454ACEC00616DB7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E8C4D0F92454ACEC00616DB7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E8C4D10024550E8300616DB7 /* TabBarNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarNavigationController.swift; sourceTree = "<group>"; };
+		E8C4D1022455F23200616DB7 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		E8C4D1062455F70E00616DB7 /* ServerConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerConstants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +62,7 @@
 		E8C4D0EA2454ACEA00616DB7 /* OnTheMap */ = {
 			isa = PBXGroup;
 			children = (
+				E8C4D1042455F65300616DB7 /* Constants */,
 				E8C4D0FF24550E5500616DB7 /* Controllers */,
 				E8C4D0EB2454ACEA00616DB7 /* AppDelegate.swift */,
 				E8C4D0ED2454ACEA00616DB7 /* SceneDelegate.swift */,
@@ -74,8 +79,17 @@
 			isa = PBXGroup;
 			children = (
 				E8C4D10024550E8300616DB7 /* TabBarNavigationController.swift */,
+				E8C4D1022455F23200616DB7 /* LoginViewController.swift */,
 			);
 			path = Controllers;
+			sourceTree = "<group>";
+		};
+		E8C4D1042455F65300616DB7 /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				E8C4D1062455F70E00616DB7 /* ServerConstants.swift */,
+			);
+			path = Constants;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -151,7 +165,9 @@
 			files = (
 				E8C4D0F02454ACEB00616DB7 /* ViewController.swift in Sources */,
 				E8C4D0EC2454ACEA00616DB7 /* AppDelegate.swift in Sources */,
+				E8C4D1072455F70E00616DB7 /* ServerConstants.swift in Sources */,
 				E8C4D10124550E8300616DB7 /* TabBarNavigationController.swift in Sources */,
+				E8C4D1032455F23200616DB7 /* LoginViewController.swift in Sources */,
 				E8C4D0EE2454ACEA00616DB7 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
