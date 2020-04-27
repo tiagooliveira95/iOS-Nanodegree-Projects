@@ -100,7 +100,7 @@
                         <outlet property="emailField" destination="7CD-vG-4IU" id="ceZ-Gh-rGV"/>
                         <outlet property="loginButton" destination="dI9-Qo-E75" id="2Fz-AT-cZH"/>
                         <outlet property="passwordField" destination="NtE-OZ-jXi" id="A91-DA-awO"/>
-                        <segue destination="51h-PY-rMK" kind="show" id="ahb-dQ-CVa"/>
+                        <segue destination="51h-PY-rMK" kind="show" identifier="TabBarFromLogin" id="ahb-dQ-CVa"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -199,7 +199,7 @@
         <!--Map-->
         <scene sceneID="6z2-bE-EzD">
             <objects>
-                <viewController id="m8P-Ab-2gu" sceneMemberID="viewController">
+                <viewController id="m8P-Ab-2gu" customClass="MapViewController" customModule="OnTheMap" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="RXa-hC-YyY">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -224,6 +224,9 @@
                         <viewLayoutGuide key="safeArea" id="zF5-8x-i2C"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Map" image="icon_mapview-selected" selectedImage="icon_mapview-deselected" id="rIO-W0-CP4"/>
+                    <connections>
+                        <outlet property="mapView" destination="atk-rn-MPL" id="DsH-vB-qEj"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CuF-af-cig" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
