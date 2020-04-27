@@ -46,7 +46,11 @@ class LoginViewController: UIViewController {
    
     
     @IBAction func onSignInButtonClicked(_ sender: Any) {
-        //TODO redirect user to Udacity sign in webpage
+        let url = URL(string: ServerConstants.SIGN_IN_URL)
+        if UIApplication.shared.canOpenURL(url!) {
+            UIApplication.shared.open(url!, options: [:], completionHandler: nil)
+        } else {
+            //TODO show message
+        }
     }
-    
 }
