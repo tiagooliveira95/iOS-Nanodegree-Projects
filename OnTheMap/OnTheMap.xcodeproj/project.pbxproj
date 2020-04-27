@@ -22,6 +22,9 @@
 		E8C4D11024567F8100616DB7 /* StudentProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C4D10F24567F8100616DB7 /* StudentProvider.swift */; };
 		E8C4D1132456805C00616DB7 /* Student.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C4D1122456805C00616DB7 /* Student.swift */; };
 		E8C4D1162457218200616DB7 /* PinUIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C4D1152457218200616DB7 /* PinUIButton.swift */; };
+		E8C4D118245736C900616DB7 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C4D117245736C900616DB7 /* TableViewController.swift */; };
+		E8C4D11D24574FC400616DB7 /* StudentLocationViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C4D11C24574FC400616DB7 /* StudentLocationViewCell.swift */; };
+		E8C4D11F24579CB500616DB7 /* Identifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C4D11E24579CB500616DB7 /* Identifiers.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +45,9 @@
 		E8C4D10F24567F8100616DB7 /* StudentProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentProvider.swift; sourceTree = "<group>"; };
 		E8C4D1122456805C00616DB7 /* Student.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Student.swift; sourceTree = "<group>"; };
 		E8C4D1152457218200616DB7 /* PinUIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinUIButton.swift; sourceTree = "<group>"; };
+		E8C4D117245736C900616DB7 /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
+		E8C4D11C24574FC400616DB7 /* StudentLocationViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentLocationViewCell.swift; sourceTree = "<group>"; };
+		E8C4D11E24579CB500616DB7 /* Identifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Identifiers.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +80,7 @@
 		E8C4D0EA2454ACEA00616DB7 /* OnTheMap */ = {
 			isa = PBXGroup;
 			children = (
+				E8C4D119245737FB00616DB7 /* Views */,
 				E8C4D1142457216200616DB7 /* Ui */,
 				E8C4D1112456804200616DB7 /* Models */,
 				E8C4D10824562D1900616DB7 /* Auth */,
@@ -96,6 +103,7 @@
 				E8C4D10024550E8300616DB7 /* TabBarNavigationController.swift */,
 				E8C4D1022455F23200616DB7 /* LoginViewController.swift */,
 				E8C4D10D245672F600616DB7 /* MapViewController.swift */,
+				E8C4D117245736C900616DB7 /* TableViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -105,6 +113,7 @@
 			children = (
 				E8C4D10B2456570F00616DB7 /* SeguesConstants.swift */,
 				E8C4D1062455F70E00616DB7 /* ServerConstants.swift */,
+				E8C4D11E24579CB500616DB7 /* Identifiers.swift */,
 			);
 			path = Constants;
 			sourceTree = "<group>";
@@ -132,6 +141,14 @@
 				E8C4D1152457218200616DB7 /* PinUIButton.swift */,
 			);
 			path = Ui;
+			sourceTree = "<group>";
+		};
+		E8C4D119245737FB00616DB7 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				E8C4D11C24574FC400616DB7 /* StudentLocationViewCell.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -207,6 +224,7 @@
 			files = (
 				E8C4D0F02454ACEB00616DB7 /* ViewController.swift in Sources */,
 				E8C4D1162457218200616DB7 /* PinUIButton.swift in Sources */,
+				E8C4D118245736C900616DB7 /* TableViewController.swift in Sources */,
 				E8C4D10C2456570F00616DB7 /* SeguesConstants.swift in Sources */,
 				E8C4D0EC2454ACEA00616DB7 /* AppDelegate.swift in Sources */,
 				E8C4D1132456805C00616DB7 /* Student.swift in Sources */,
@@ -217,6 +235,8 @@
 				E8C4D1032455F23200616DB7 /* LoginViewController.swift in Sources */,
 				E8C4D11024567F8100616DB7 /* StudentProvider.swift in Sources */,
 				E8C4D0EE2454ACEA00616DB7 /* SceneDelegate.swift in Sources */,
+				E8C4D11F24579CB500616DB7 /* Identifiers.swift in Sources */,
+				E8C4D11D24574FC400616DB7 /* StudentLocationViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
