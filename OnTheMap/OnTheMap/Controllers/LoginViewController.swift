@@ -34,11 +34,12 @@ class LoginViewController: UIViewController {
                 return
             }
             if isLoggedIn == false {
-                print("loggedIn")
+                print("log in failed")
                 return
             }
+            
             DispatchQueue.main.async {
-            self.performSegue(withIdentifier: SeguesConstants.SegueTabBarFromLogin, sender: nil)
+                self.performSegue(withIdentifier: SeguesConstants.SegueTabBarFromLogin, sender: nil)
             }
         }
     }
