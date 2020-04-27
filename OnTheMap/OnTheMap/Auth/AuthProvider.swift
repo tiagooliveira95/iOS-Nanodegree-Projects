@@ -8,8 +8,25 @@
 
 import Foundation
 
+struct Session: Codable {
+    var id: String!
+    var exporation: Date!
+}
+
+struct Account: Codable {
+    var registered: Bool!
+    var key: String!
+}
+
+struct LoginData: Codable {
+    var account: Account!
+    var session: Session!
+}
+
 
 class AuthProvider {
+    
+    static var loginData: LoginData!
     
     static func login(email: String, password: String,completionHandler: @escaping (Bool, Error?) -> ()){
         var request = URLRequest(url: URL(string: ServerConstants.BASE_URL + ServerConstants.PATH_SESSION)!)
@@ -25,7 +42,16 @@ class AuthProvider {
             return
           }
           let range = 5..<data!.count
-          let newData = data?.subdata(in: range) /* subset response data! */
+          let newData = data?.subdata(in: range)
+          /* subset response data! */
+          
+          let loginData: LoginData = try! JSONDecoder().decode(LoginData.self, from: newData!)
+          self.loginData = loginData
+          guard (loginData.session?.id) != nil else {
+               completionHandler(false, nil)
+               return
+          }
+            
           print(String(data: newData!, encoding: .utf8)!)
           completionHandler(true, nil)
         }
@@ -52,8 +78,20 @@ class AuthProvider {
           let range = 5..<data!.count
           let newData = data?.subdata(in: range) /* subset response data! */
           print(String(data: newData!, encoding: .utf8)!)
+          self.loginData = nil
           completionHandler(true, nil)
         }
         task.resume()
     }
 }
+
+// response example
+//{"account":{
+//    "registered":true,
+//    "key":"0000"
+//    },
+//    "session": {
+//        "id":"0000",
+//        "expiration":"2020-04-27T22:28:37.280064Z"
+//    }
+//}

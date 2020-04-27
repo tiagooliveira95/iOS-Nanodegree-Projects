@@ -37,6 +37,9 @@ class LoginViewController: UIViewController {
                 print("loggedIn")
                 return
             }
+            DispatchQueue.main.async {
+            self.performSegue(withIdentifier: SeguesConstants.SegueTabBarFromLogin, sender: nil)
+            }
         }
     }
    

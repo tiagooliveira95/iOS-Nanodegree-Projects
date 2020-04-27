@@ -6,6 +6,7 @@
 //  Copyright © 2020 Tiago Oliveira. All rights reserved.
 //
 
+import Foundation
 import UIKit
 
 class TabBarNavigationController : UITabBarController {

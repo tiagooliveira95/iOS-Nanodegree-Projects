@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="INI-R8-nmn">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
@@ -7,6 +7,22 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="cCH-FI-Evb">
+            <objects>
+                <navigationController id="INI-R8-nmn" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="uR8-mp-xPt">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="m6O-AL-8En"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CPs-5h-eu1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-643" y="130"/>
+        </scene>
         <!--Login View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
@@ -16,20 +32,20 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo-u" translatesAutoresizingMaskIntoConstraints="NO" id="wAb-H0-un4">
-                                <rect key="frame" x="87" y="169" width="240" height="62"/>
+                                <rect key="frame" x="87" y="213" width="240" height="62"/>
                             </imageView>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7CD-vG-4IU">
-                                <rect key="frame" x="20" y="276" width="374" height="34"/>
+                                <rect key="frame" x="20" y="320" width="374" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" textContentType="email"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NtE-OZ-jXi">
-                                <rect key="frame" x="20" y="318" width="374" height="34"/>
+                                <rect key="frame" x="20" y="362" width="374" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dI9-Qo-E75">
-                                <rect key="frame" x="20" y="360" width="374" height="46"/>
+                                <rect key="frame" x="20" y="404" width="374" height="46"/>
                                 <color key="backgroundColor" red="0.062810324129999998" green="0.6984155178" blue="0.89414423700000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="46" id="t9q-03-71a"/>
@@ -51,7 +67,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Login at Udacity" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mU5-I6-7Zq">
-                                <rect key="frame" x="145" y="239" width="124" height="21"/>
+                                <rect key="frame" x="145" y="283" width="124" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -79,10 +95,12 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <navigationItem key="navigationItem" id="Oug-y1-kmK"/>
                     <connections>
                         <outlet property="emailField" destination="7CD-vG-4IU" id="ceZ-Gh-rGV"/>
                         <outlet property="loginButton" destination="dI9-Qo-E75" id="2Fz-AT-cZH"/>
                         <outlet property="passwordField" destination="NtE-OZ-jXi" id="A91-DA-awO"/>
+                        <segue destination="51h-PY-rMK" kind="show" id="ahb-dQ-CVa"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -100,18 +118,6 @@
                             <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IMm-qG-U7n">
                                 <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <items>
-                                    <navigationItem title="Title" id="eGm-QP-Rqm">
-                                        <rightBarButtonItems>
-                                            <barButtonItem image="icon_pin" id="bHd-IC-hSU">
-                                                <connections>
-                                                    <segue destination="69h-Cf-tyU" kind="show" id="B6C-Xm-GDQ"/>
-                                                </connections>
-                                            </barButtonItem>
-                                            <barButtonItem image="icon_refresh" id="PlF-WD-aaV"/>
-                                        </rightBarButtonItems>
-                                    </navigationItem>
-                                </items>
                             </navigationBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Uhj-VF-ypB">
                                 <rect key="frame" x="0.0" y="88" width="414" height="774"/>
@@ -158,7 +164,7 @@
             <objects>
                 <viewController id="69h-Cf-tyU" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="6OD-YQ-tnQ">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="ohU-GB-1Vj"/>
@@ -203,10 +209,17 @@
             </objects>
             <point key="canvasLocation" x="1784" y="-194"/>
         </scene>
-        <!--Tab Bar Navigation Controller-->
+        <!--OnTheMap-->
         <scene sceneID="WGU-3s-Gnz">
             <objects>
                 <tabBarController id="51h-PY-rMK" customClass="TabBarNavigationController" customModule="OnTheMap" customModuleProvider="target" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" title="OnTheMap" id="oU5-nS-LVa">
+                        <barButtonItem key="leftBarButtonItem" title="Sign out" id="5kA-87-vvB"/>
+                        <rightBarButtonItems>
+                            <barButtonItem image="icon_pin" id="Z8U-TH-bfl"/>
+                            <barButtonItem image="icon_refresh" id="bnk-MX-oLm"/>
+                        </rightBarButtonItems>
+                    </navigationItem>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="jUE-Sc-LPS">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -218,20 +231,10 @@
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WPf-Rd-GXd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <navigationBar contentMode="scaleToFill" id="MjH-ie-ahH">
-                    <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                    <items>
-                        <navigationItem title="Title" id="TRW-z6-YGL"/>
-                    </items>
-                </navigationBar>
             </objects>
             <point key="canvasLocation" x="864" y="131"/>
         </scene>
     </scenes>
-    <inferredMetricsTieBreakers>
-        <segue reference="B6C-Xm-GDQ"/>
-    </inferredMetricsTieBreakers>
     <resources>
         <image name="icon_listview-deselected" width="75" height="50"/>
         <image name="icon_listview-selected" width="75" height="50"/>
