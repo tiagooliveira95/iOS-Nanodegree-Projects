@@ -167,10 +167,10 @@
             </objects>
             <point key="canvasLocation" x="1783" y="492"/>
         </scene>
-        <!--View Controller-->
+        <!--Pick Location View Controller-->
         <scene sceneID="VSD-Or-cmc">
             <objects>
-                <viewController id="XvT-mU-v2W" sceneMemberID="viewController">
+                <viewController id="XvT-mU-v2W" customClass="PickLocationViewController" customModule="OnTheMap" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ZB4-fm-URL">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -197,6 +197,9 @@
                                 <state key="normal" title="Submit">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="onSubmitButtonCLicked:" destination="XvT-mU-v2W" eventType="touchUpInside" id="4TG-tD-qLe"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -215,15 +218,19 @@
                         <viewLayoutGuide key="safeArea" id="fiA-xN-Gyd"/>
                     </view>
                     <navigationItem key="navigationItem" id="jlE-Ou-qUi"/>
+                    <connections>
+                        <outlet property="mapView" destination="CNy-P5-re1" id="eOI-fy-Sqw"/>
+                        <outlet property="urlField" destination="gcS-Km-k7h" id="8Hp-4f-Efq"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="05c-G2-hZ4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3421.739130434783" y="130.58035714285714"/>
         </scene>
-        <!--View Controller-->
+        <!--Location View Controller-->
         <scene sceneID="Oci-Pb-coj">
             <objects>
-                <viewController id="69h-Cf-tyU" sceneMemberID="viewController">
+                <viewController id="69h-Cf-tyU" customClass="LocationViewController" customModule="OnTheMap" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="6OD-YQ-tnQ">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -261,6 +268,9 @@
                                 <rect key="frame" x="115" y="677" width="184" height="41"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <state key="normal" title="Find on the Map"/>
+                                <connections>
+                                    <action selector="onFindOnTheMapClickButtonClicked:" destination="69h-Cf-tyU" eventType="touchUpInside" id="Pnx-gb-x8a"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -287,7 +297,8 @@
                         <barButtonItem key="backBarButtonItem" title="Back" id="iVF-7c-Ry5"/>
                     </navigationItem>
                     <connections>
-                        <segue destination="XvT-mU-v2W" kind="show" id="nVe-IE-Aiu"/>
+                        <outlet property="locationField" destination="bo0-Lg-cQH" id="PXB-QL-fJL"/>
+                        <segue destination="XvT-mU-v2W" kind="show" identifier="FindOnMapSegue" id="nVe-IE-Aiu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OiK-tG-bDV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -335,7 +346,11 @@
             <objects>
                 <tabBarController id="51h-PY-rMK" customClass="TabBarNavigationController" customModule="OnTheMap" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" title="OnTheMap" id="oU5-nS-LVa">
-                        <barButtonItem key="leftBarButtonItem" title="Sign out" id="5kA-87-vvB"/>
+                        <barButtonItem key="leftBarButtonItem" title="Sign out" id="5kA-87-vvB">
+                            <connections>
+                                <action selector="onSignOutButtonClicked:" destination="51h-PY-rMK" id="0Yy-yY-qEl"/>
+                            </connections>
+                        </barButtonItem>
                         <rightBarButtonItems>
                             <barButtonItem image="icon_pin" id="Z8U-TH-bfl">
                                 <connections>
