@@ -11,8 +11,20 @@ import UIKit
 
 class TabBarNavigationController : UITabBarController {
     
+    @IBAction func onSignOutButtonClicked(_ sender: Any) {
+        //show loading message
+        AuthProvider.logout { (result, error) in
+            if error != nil {
+                //TODO show error
+                return;
+            }
     
-    
+            DispatchQueue.main.async {
+                self.dismiss(animated: true)
+                self.navigationController?.popToRootViewController(animated: true)
+            }
+        }
+    }
     
     @IBAction func onAddNewLocationClicked(_ sender: Any) {
         performSegue(withIdentifier: SeguesConstants.SegueAddPin, sender: nil)
