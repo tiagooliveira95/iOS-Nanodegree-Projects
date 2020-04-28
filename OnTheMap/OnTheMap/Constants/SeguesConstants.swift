@@ -8,4 +8,5 @@
 
 class SeguesConstants{
     static let SegueTabBarFromLogin = "TabBarFromLogin"
+    static let SegueAddPin = "SegueAddPin"
 }

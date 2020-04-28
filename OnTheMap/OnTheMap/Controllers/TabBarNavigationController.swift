@@ -11,4 +11,10 @@ import UIKit
 
 class TabBarNavigationController : UITabBarController {
     
+    
+    
+    
+    @IBAction func onAddNewLocationClicked(_ sender: Any) {
+        performSegue(withIdentifier: SeguesConstants.SegueAddPin, sender: nil)
+    }
 }
