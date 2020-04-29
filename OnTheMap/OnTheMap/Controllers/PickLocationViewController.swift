@@ -60,8 +60,9 @@ class PickLocationViewController: UIViewController{
           
             print("location saved: \(result)")
             
-            DispatchQueue.main.async {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 self.performSegue(withIdentifier: SeguesConstants.UnwindBackToMapSegue, sender: self)
+                self.dismiss(animated: true)
             }
         }
     }

@@ -37,35 +37,37 @@ class LoginViewController: UIViewController {
         self.showActivityLoadingIndicatorView("Logging in...")
         
         AuthProvider.login(email: email, password: password) { (isLoggedIn, error) in
-            //Dismiss loading indicator
-            DispatchQueue.main.async {
-                self.dismiss(animated: true)
-            }
-            
             //check for errors such as network not available
             if error != nil {
+                DispatchQueue.main.async {
+                    self.dismiss(animated: false)
+                    self.loginButton.isEnabled = true
+                }
+                
                 print("error logging in \(String(describing: error?.localizedDescription))")
                 self.showUIAlert(title: "An error occured while logging in", message: error?.localizedDescription, style: .alert, actions: [], viewController: nil)
                 
-                DispatchQueue.main.async {
-                    self.loginButton.isEnabled = true
-                }
+                
                 return
             }
             
             //check for invalid credentials
             if isLoggedIn == false {
                 print("log in failed")
-                self.showUIAlert(title: "Invalid credentials", message: "Please review your credentials details", style: .alert, actions: [], viewController: nil)
                 
                 DispatchQueue.main.async {
+                    self.dismiss(animated: false)
                     self.loginButton.isEnabled = true
                 }
+                
+                self.showUIAlert(title: "Invalid credentials", message: "Please review your credentials details", style: .alert, actions: [], viewController: nil)
                 return
             }
             
             //performs segue
-            DispatchQueue.main.async {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                self.loginButton.isEnabled = true
+                self.dismiss(animated: false)
                 self.performSegue(withIdentifier: SeguesConstants.SegueTabBarFromLogin, sender: nil)
             }
         }
