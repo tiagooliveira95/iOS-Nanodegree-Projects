@@ -16,6 +16,7 @@ class PickLocationViewController: UIViewController{
 
     @IBOutlet weak var urlField: UITextField!
     @IBOutlet weak var mapView: MKMapView!
+
     
 
     override func viewDidAppear(_ animated: Bool) {
@@ -33,15 +34,38 @@ class PickLocationViewController: UIViewController{
         CLGeocoder().geocodeAddressString(address) {
             (placemarks, error) in
             guard error == nil else {
-                //TODO shoe error to user
+                self.showUIAlert(title: "Address not found", message: error?.localizedDescription, style: .alert, actions: [], viewController: nil)
                 return
             }
             completion(placemarks?.first?.location?.coordinate)
         }
     }
     
-    
+
     @IBAction func onSubmitButtonCLicked(_ sender: Any) {
+        self.showActivityLoadingIndicatorView("Uploading location...")
+
+        let studentPostLocation = StudentPostLocation();
+       
+        studentPostLocation.firstName = "Tiago"
+        studentPostLocation.lastName = "Oliveira"
+        studentPostLocation.latitude = latlng.latitude
+        studentPostLocation.longitude = latlng.longitude
+        studentPostLocation.mapString = address
+        studentPostLocation.mediaURL = urlField.text
+        studentPostLocation.uniqueKey = AuthProvider.loginData.account.key
+        
+        StudentProvider.postStudyLocation(studentPostLocation: studentPostLocation) {
+            result in
+          
+            print("location saved: \(result)")
+            
+            DispatchQueue.main.async {
+                self.performSegue(withIdentifier: SeguesConstants.UnwindBackToMapSegue, sender: self)
+            }
+        }
     }
-    
 }
+    
+
+

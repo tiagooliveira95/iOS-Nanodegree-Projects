@@ -16,18 +16,25 @@ class TableViewController: UITableViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         loadData()
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadList(notification:)), name:NSNotification.Name(rawValue: NotificationConstants.NotificationReload), object: nil)
+    }
+    
+    @objc func reloadList(notification: NSNotification){
+           loadData()
     }
 
     func loadData() {
-        //TODO show loaidng pins message
+        self.showActivityLoadingIndicatorView("Loading students ...")
+
         StudentProvider.getStudents(order: true) { (students, error) in
             if error != nil {
-                //TODO show error
+                self.showUIAlert(title: "Network error occurred", message: error?.localizedDescription, style: .alert, actions: [], viewController: nil)
                 return
             }
             self.students = students
             DispatchQueue.main.async {
                 self.tableView.reloadData()
+                self.dismiss(animated: true)
             }
         }
     }
@@ -43,11 +50,11 @@ class TableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let url = URL(string: students[indexPath.row].mediaURL)
+        let url = URL(string: students[indexPath.row].mediaURL.starts(with: "www") ? "https://" + students[indexPath.row].mediaURL : students[indexPath.row].mediaURL)
         if UIApplication.shared.canOpenURL(url!) {
             UIApplication.shared.open(url!, options: [:], completionHandler: nil)
         } else {
-            //TODO show message
+            self.showUIAlert(title: "Invalid url", message: "\(students[indexPath.row].mediaURL) is not a valid URL!", style: .alert, actions: [], viewController: nil)
         }
     }
 }

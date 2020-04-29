@@ -14,26 +14,28 @@ import MapKit
 class MapViewController: UIViewController, MKMapViewDelegate {
     
     @IBOutlet weak var mapView: MKMapView!
-    
+    @IBAction func myUnwindAction(unwindSegue: UIStoryboardSegue){}
+
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         mapView.delegate = self
         loadPins()
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadList(notification:)), name:NSNotification.Name(rawValue: NotificationConstants.NotificationReload), object: nil)
+    }
+    
+    @objc func reloadList(notification: NSNotification){
+           loadPins()
     }
     
     func loadPins() {
         self.mapView.removeAnnotations(self.mapView.annotations)
         
-        
-
-        //TODO tell user that pins are loading
-        
-    
+        self.showActivityLoadingIndicatorView("Loading...")
+            
         StudentProvider.getStudents { (students, error) in
             if error != nil {
-                print("error happen")
-                //Show user network error
+                self.showUIAlert(title: "Network error occurred", message: error?.localizedDescription, style: .alert, actions: [], viewController: nil)
                 return
             }
             
@@ -45,6 +47,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
                     pin.title = "\(student.firstName) \(student.lastName)"
                     pin.subtitle = student.mediaURL
                     self.mapView.addAnnotation(pin)
+                    self.dismiss(animated: true)
                 }
             }
         }

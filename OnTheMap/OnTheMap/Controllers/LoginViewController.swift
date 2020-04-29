@@ -14,30 +14,57 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var passwordField: UITextField!
     @IBOutlet weak var loginButton: UIButton!
     
-
+    
     @IBAction func onLoginButtonClicked(_ sender: Any) {
+        //Disable login button to avoid multiple clicks
+        loginButton.isEnabled = false
+        
         //Validate user input
         guard let email = emailField?.text, let password = passwordField?.text,
             //check if user input is empty
-            !email.isEmpty || !password.isEmpty ||
+            !email.isEmpty && !password.isEmpty &&
             //Validate email and check if password ranges are valid, Udacity has a minimum password length of 8 charecters.
             //Therefore there's no need to make a login request to the server if the password doesn't meet the minimum requirements
-            password.count <= ServerConstants.UDACITY_MIN_PASSWORD_LENGTH || !email.contains("@")
-            else {
-            //TODO show error to the user
+            password.count >= ServerConstants.UDACITY_MIN_PASSWORD_LENGTH && email.contains("@") else {
+                
+            loginButton.isEnabled = true
+            
+            self.showUIAlert(title: "Invalid credentials", message: "Please review your credentials details", style: .alert, actions: [], viewController: nil)
+                
             return
         }
-        //TODO proceed with login
+        
+        self.showActivityLoadingIndicatorView("Logging in...")
+        
         AuthProvider.login(email: email, password: password) { (isLoggedIn, error) in
+            //Dismiss loading indicator
+            DispatchQueue.main.async {
+                self.dismiss(animated: true)
+            }
+            
+            //check for errors such as network not available
             if error != nil {
                 print("error logging in \(String(describing: error?.localizedDescription))")
-                return
-            }
-            if isLoggedIn == false {
-                print("log in failed")
+                self.showUIAlert(title: "An error occured while logging in", message: error?.localizedDescription, style: .alert, actions: [], viewController: nil)
+                
+                DispatchQueue.main.async {
+                    self.loginButton.isEnabled = true
+                }
                 return
             }
             
+            //check for invalid credentials
+            if isLoggedIn == false {
+                print("log in failed")
+                self.showUIAlert(title: "Invalid credentials", message: "Please review your credentials details", style: .alert, actions: [], viewController: nil)
+                
+                DispatchQueue.main.async {
+                    self.loginButton.isEnabled = true
+                }
+                return
+            }
+            
+            //performs segue
             DispatchQueue.main.async {
                 self.performSegue(withIdentifier: SeguesConstants.SegueTabBarFromLogin, sender: nil)
             }
@@ -50,7 +77,7 @@ class LoginViewController: UIViewController {
         if UIApplication.shared.canOpenURL(url!) {
             UIApplication.shared.open(url!, options: [:], completionHandler: nil)
         } else {
-            //TODO show message
+            self.showUIAlert(title: "Invalid url", message: "\(ServerConstants.SIGN_IN_URL) is not a valid URL!", style: .alert, actions: [], viewController: nil)
         }
     }
 }

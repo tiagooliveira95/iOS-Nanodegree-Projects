@@ -15,12 +15,10 @@ class TabBarNavigationController : UITabBarController {
         //show loading message
         AuthProvider.logout { (result, error) in
             if error != nil {
-                //TODO show error
+                self.showUIAlert(title: "Error", message: error?.localizedDescription, style: .alert, actions: [], viewController: nil)
                 return;
             }
-    
             DispatchQueue.main.async {
-                self.dismiss(animated: true)
                 self.navigationController?.popToRootViewController(animated: true)
             }
         }
@@ -28,5 +26,9 @@ class TabBarNavigationController : UITabBarController {
     
     @IBAction func onAddNewLocationClicked(_ sender: Any) {
         performSegue(withIdentifier: SeguesConstants.SegueAddPin, sender: nil)
+    }
+    
+    @IBAction func onRefreshButtonClicked(_ sender: Any) {
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationConstants.NotificationReload), object: nil)
     }
 }
