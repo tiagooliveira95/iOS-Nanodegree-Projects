@@ -12,7 +12,8 @@ class ServerConstants {
     static let BASE_URL = "https://onthemap-api.udacity.com/v1/"
     static let SIGN_IN_URL = "https://auth.udacity.com/sign-in"
     static let PATH_SESSION = "session"
-    static let PATH_STUDENT = "StudentLocation?limit=100"
+    static let PATH_USERS = "users/"
+    static let PATH_STUDENT = "StudentLocation"
 
     
 }

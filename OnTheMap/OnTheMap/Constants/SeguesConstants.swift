@@ -10,4 +10,5 @@ class SeguesConstants{
     static let SegueTabBarFromLogin = "TabBarFromLogin"
     static let SegueAddPin = "SegueAddPin"
     static let SegueFindOnMapSegue = "FindOnMapSegue"
+    static let UnwindBackToMapSegue  = "unwindBackToMap"
 }

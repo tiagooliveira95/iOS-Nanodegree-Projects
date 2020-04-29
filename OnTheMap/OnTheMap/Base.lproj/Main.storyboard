@@ -198,7 +198,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <action selector="onSubmitButtonCLicked:" destination="XvT-mU-v2W" eventType="touchUpInside" id="4TG-tD-qLe"/>
+                                    <action selector="onSubmitButtonCLicked:" destination="XvT-mU-v2W" eventType="touchUpInside" id="qhq-0T-s0y"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -221,6 +221,7 @@
                     <connections>
                         <outlet property="mapView" destination="CNy-P5-re1" id="eOI-fy-Sqw"/>
                         <outlet property="urlField" destination="gcS-Km-k7h" id="8Hp-4f-Efq"/>
+                        <segue destination="8ZA-DL-DmM" kind="unwind" identifier="unwindBackToMap" unwindAction="myUnwindActionWithUnwindSegue:" id="QA7-qj-7mw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="05c-G2-hZ4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -333,11 +334,13 @@
                         <viewLayoutGuide key="safeArea" id="zF5-8x-i2C"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Map" image="icon_mapview-selected" selectedImage="icon_mapview-deselected" id="rIO-W0-CP4"/>
+                    <navigationItem key="navigationItem" id="YzC-uM-7Ht"/>
                     <connections>
                         <outlet property="mapView" destination="atk-rn-MPL" id="DsH-vB-qEj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CuF-af-cig" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="8ZA-DL-DmM" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1782.608695652174" y="-194.19642857142856"/>
         </scene>
@@ -357,7 +360,11 @@
                                     <action selector="onAddNewLocationClicked:" destination="51h-PY-rMK" id="68d-Wo-pru"/>
                                 </connections>
                             </barButtonItem>
-                            <barButtonItem image="icon_refresh" id="bnk-MX-oLm"/>
+                            <barButtonItem image="icon_refresh" id="bnk-MX-oLm">
+                                <connections>
+                                    <action selector="onRefreshButtonClicked:" destination="51h-PY-rMK" id="sqU-AD-j9c"/>
+                                </connections>
+                            </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="jUE-Sc-LPS">

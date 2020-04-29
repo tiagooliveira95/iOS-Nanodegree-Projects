@@ -27,6 +27,9 @@
 		E8C4D11F24579CB500616DB7 /* Identifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C4D11E24579CB500616DB7 /* Identifiers.swift */; };
 		E8C4D1212457AB7D00616DB7 /* LocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C4D1202457AB7D00616DB7 /* LocationViewController.swift */; };
 		E8C4D1232457ABD900616DB7 /* PickLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C4D1222457ABD900616DB7 /* PickLocationViewController.swift */; };
+		E8C4D1252457D94B00616DB7 /* StudentPostLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C4D1242457D94B00616DB7 /* StudentPostLocation.swift */; };
+		E8C4D1272458D7F700616DB7 /* NotificationConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C4D1262458D7F700616DB7 /* NotificationConstants.swift */; };
+		E8C4D1292458D98E00616DB7 /* ViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C4D1282458D98E00616DB7 /* ViewControllerExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +55,9 @@
 		E8C4D11E24579CB500616DB7 /* Identifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Identifiers.swift; sourceTree = "<group>"; };
 		E8C4D1202457AB7D00616DB7 /* LocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViewController.swift; sourceTree = "<group>"; };
 		E8C4D1222457ABD900616DB7 /* PickLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickLocationViewController.swift; sourceTree = "<group>"; };
+		E8C4D1242457D94B00616DB7 /* StudentPostLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentPostLocation.swift; sourceTree = "<group>"; };
+		E8C4D1262458D7F700616DB7 /* NotificationConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationConstants.swift; sourceTree = "<group>"; };
+		E8C4D1282458D98E00616DB7 /* ViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +103,7 @@
 				E8C4D0F42454ACEC00616DB7 /* Assets.xcassets */,
 				E8C4D0F62454ACEC00616DB7 /* LaunchScreen.storyboard */,
 				E8C4D0F92454ACEC00616DB7 /* Info.plist */,
+				E8C4D1282458D98E00616DB7 /* ViewControllerExtension.swift */,
 			);
 			path = OnTheMap;
 			sourceTree = "<group>";
@@ -120,6 +127,7 @@
 				E8C4D10B2456570F00616DB7 /* SeguesConstants.swift */,
 				E8C4D1062455F70E00616DB7 /* ServerConstants.swift */,
 				E8C4D11E24579CB500616DB7 /* Identifiers.swift */,
+				E8C4D1262458D7F700616DB7 /* NotificationConstants.swift */,
 			);
 			path = Constants;
 			sourceTree = "<group>";
@@ -137,6 +145,7 @@
 			isa = PBXGroup;
 			children = (
 				E8C4D1122456805C00616DB7 /* Student.swift */,
+				E8C4D1242457D94B00616DB7 /* StudentPostLocation.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -236,14 +245,17 @@
 				E8C4D0EC2454ACEA00616DB7 /* AppDelegate.swift in Sources */,
 				E8C4D1132456805C00616DB7 /* Student.swift in Sources */,
 				E8C4D1072455F70E00616DB7 /* ServerConstants.swift in Sources */,
+				E8C4D1292458D98E00616DB7 /* ViewControllerExtension.swift in Sources */,
 				E8C4D10E245672F600616DB7 /* MapViewController.swift in Sources */,
 				E8C4D10124550E8300616DB7 /* TabBarNavigationController.swift in Sources */,
 				E8C4D10A24562D5400616DB7 /* AuthProvider.swift in Sources */,
 				E8C4D1032455F23200616DB7 /* LoginViewController.swift in Sources */,
 				E8C4D11024567F8100616DB7 /* StudentProvider.swift in Sources */,
+				E8C4D1272458D7F700616DB7 /* NotificationConstants.swift in Sources */,
 				E8C4D0EE2454ACEA00616DB7 /* SceneDelegate.swift in Sources */,
 				E8C4D11F24579CB500616DB7 /* Identifiers.swift in Sources */,
 				E8C4D11D24574FC400616DB7 /* StudentLocationViewCell.swift in Sources */,
+				E8C4D1252457D94B00616DB7 /* StudentPostLocation.swift in Sources */,
 				E8C4D1212457AB7D00616DB7 /* LocationViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

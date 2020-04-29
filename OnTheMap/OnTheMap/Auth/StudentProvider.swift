@@ -14,7 +14,7 @@ class StudentProvider {
 
     
     static func getStudents(order: Bool? = false, completionHandler: @escaping (_ students: [Student],_ error: Error?) -> ()) {
-        var urlString = ServerConstants.BASE_URL + ServerConstants.PATH_STUDENT
+        var urlString = ServerConstants.BASE_URL + ServerConstants.PATH_STUDENT + "?limit=100"
         if order! {
             urlString += "&order=-updatedAt"
         }
@@ -25,6 +25,7 @@ class StudentProvider {
                 completionHandler([Student](), error)
                 return
             }
+            print(String(data: data!, encoding: .utf8)!)
             do {
                 let data = try JSONDecoder().decode(StudentData.self, from: data!)
                 students = data.results
@@ -32,6 +33,24 @@ class StudentProvider {
             } catch {
                 print(error)
             }
+        }
+        task.resume()
+    }
+    
+    static func postStudyLocation(studentPostLocation: StudentPostLocation, completionHandler: @escaping(Bool)->()) {
+        var request = URLRequest(url: URL(string: ServerConstants.BASE_URL + ServerConstants.PATH_STUDENT)!)
+        request.httpMethod = "POST"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        let jsonData = try? JSONEncoder().encode(studentPostLocation)
+        request.httpBody = jsonData
+        let session = URLSession.shared
+        let task = session.dataTask(with: request) { data, response, error in
+          if error != nil { // Handle error…
+            completionHandler(false)
+            return
+          }
+            completionHandler(true)
         }
         task.resume()
     }

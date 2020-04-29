@@ -11,7 +11,7 @@ import UIKit
 class LocationViewController: UIViewController{
     
     @IBOutlet weak var locationField: UITextField!
-    
+        
     @IBAction func onFindOnTheMapClickButtonClicked(_ sender: Any) {
         //Check if location is valid
         guard let location = locationField.text, !location.isEmpty else {
@@ -20,9 +20,7 @@ class LocationViewController: UIViewController{
         }
         performSegue(withIdentifier: SeguesConstants.SegueFindOnMapSegue, sender: nil)
     }
-    
-    //TODO add keyboard listeners!
-    
+        
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == SeguesConstants.SegueFindOnMapSegue {
             let viewController = segue.destination as! PickLocationViewController
