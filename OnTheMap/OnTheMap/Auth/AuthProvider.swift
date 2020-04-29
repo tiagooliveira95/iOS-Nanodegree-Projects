@@ -58,6 +58,21 @@ class AuthProvider {
         task.resume()
     }
     
+    static func getUserData(studentID: String,completionHandler: @escaping (Bool, Error?) -> ()){
+        let request = URLRequest(url: URL(string: ServerConstants.BASE_URL + ServerConstants.PATH_STUDENT + studentID)!)
+        let session = URLSession.shared
+        let task = session.dataTask(with: request) { data, response, error in
+          if error != nil { // Handle error...
+            completionHandler(false, error)
+            return
+          }
+          let range = 5..<data!.count
+          let newData = data?.subdata(in: range) /* subset response data! */
+          print(String(data: newData!, encoding: .utf8)!)
+        }
+        task.resume()
+    }
+    
     static func logout(completionHandler: @escaping (Bool, Error?) -> ()){
         var request = URLRequest(url: URL(string: ServerConstants.BASE_URL + ServerConstants.PATH_SESSION)!)
         request.httpMethod = "DELETE"
