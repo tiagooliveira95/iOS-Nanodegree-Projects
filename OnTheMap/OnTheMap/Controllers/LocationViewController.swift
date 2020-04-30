@@ -56,8 +56,7 @@ class LocationViewController: UIViewController{
           }
           
           @objc func keyboardWillShow (_ notification: Notification) {
-            let keyboardHeight = getKeyboardHeight(notification)
-            self.view.frame.origin.y = -keyboardHeight
+            view.frame.origin.y -= getKeyboardHeight(notification)*0.8
           }
           
           @objc func keyboardWillHide (_ notification: Notification) {
