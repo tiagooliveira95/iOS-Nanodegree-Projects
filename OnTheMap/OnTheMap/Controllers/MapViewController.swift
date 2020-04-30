@@ -34,6 +34,8 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         self.showActivityLoadingIndicatorView("Loading...")
             
         StudentProvider.getStudents { (students, error) in
+            DispatchQueue.main.async {self.dismiss(animated: true)}
+
             if error != nil {
                 self.showUIAlert(title: "Network error occurred", message: error?.localizedDescription, style: .alert, actions: [], viewController: nil)
                 return
@@ -47,7 +49,6 @@ class MapViewController: UIViewController, MKMapViewDelegate {
                     pin.title = "\(student.firstName) \(student.lastName)"
                     pin.subtitle = student.mediaURL
                     self.mapView.addAnnotation(pin)
-                    self.dismiss(animated: true)
                 }
             }
         }
@@ -75,7 +76,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         if UIApplication.shared.canOpenURL(url!) {
             UIApplication.shared.open(url!, options: [:], completionHandler: nil)
         } else {
-            //TODO show message
+             self.showUIAlert(title: "Invalid url", message: "\(sender.pinUrl!) is not a valid URL!", style: .alert, actions: [], viewController: nil)
         }
     }
 }

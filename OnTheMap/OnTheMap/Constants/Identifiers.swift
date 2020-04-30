@@ -7,5 +7,6 @@
 //
 
 class Identifiers{
-    static let LocationCellIdentifier = "LocationCellIdentifier"    
+    static let LocationCellIdentifier = "LocationCellIdentifier"
+    static let SubmitButtonBottomConstraitIdentifier = "submitButtonBottomConstrait"
 }
