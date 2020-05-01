@@ -16,6 +16,8 @@ class TravelLocationsViewController: UIViewController, MKMapViewDelegate{
     override func viewDidAppear(_ animated: Bool) {
         mapView.delegate = self
         loadMapPostion()
+        setGestureRecognizer()
+
     }
     
     
@@ -56,5 +58,25 @@ class TravelLocationsViewController: UIViewController, MKMapViewDelegate{
             self.mapView.setRegion(region, animated: true)
         }
        
+    }
+    
+    private func setGestureRecognizer() {
+        let gesture = UILongPressGestureRecognizer(target: self, action: #selector(onMapLongPressed))
+        gesture.minimumPressDuration = 0.5
+        mapView.addGestureRecognizer(gesture)
+    }
+    
+    @objc func onMapLongPressed(gestureRecognizer: UIGestureRecognizer){
+        if gestureRecognizer.state == .ended {
+            let touchPoint = gestureRecognizer.location(in: mapView)
+            let coordinates = mapView.convert(touchPoint, toCoordinateFrom: mapView)
+            addMapAnnotation(coordinates: coordinates)
+        }
+    }
+    
+    func addMapAnnotation(coordinates: CLLocationCoordinate2D) {
+        let annotation = MKPointAnnotation()
+        annotation.coordinate = coordinates
+        mapView.addAnnotation(annotation)
     }
 }
