@@ -114,8 +114,13 @@ class TravelLocationsViewController: UIViewController, MKMapViewDelegate{
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == Segues.PhotoAlbumSegue {
-            _ = segue.destination as! PhotoAlbumViewController
-            //TODO send selected location to photo album
+            print(type(of: sender))
+            let photoAlbumVC = segue.destination as! PhotoAlbumViewController
+            let anotation = (sender as! MKPointAnnotation)
+            let pin = Pin(context: coreData.persistentContainer.viewContext)
+            pin.lat = anotation.coordinate.latitude
+            pin.lng = anotation.coordinate.longitude
+            photoAlbumVC.mPin = pin
         }
     }
 }
