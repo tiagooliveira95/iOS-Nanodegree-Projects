@@ -13,12 +13,27 @@ class TravelLocationsViewController: UIViewController, MKMapViewDelegate{
     
     @IBOutlet weak var mapView: MKMapView!
     
+    let coreData = (UIApplication.shared.delegate as! AppDelegate)
+    var pins: [Pin] = [Pin]()
+
     override func viewDidAppear(_ animated: Bool) {
         mapView.delegate = self
         loadMapPostion()
         setGestureRecognizer()
     }
     
+    override func viewDidLoad() {
+        addSavedPins()
+    }
+    
+    func addSavedPins(){
+        pins = getSavedPins()
+
+        for pin in pins {
+            let coordinates = CLLocationCoordinate2D(latitude: CLLocationDegrees(exactly: pin.lat)!, longitude: CLLocationDegrees(exactly: pin.lng)!)
+            addMapAnnotation(coordinates: coordinates)
+        }
+    }
     
     func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
         saveMapPosition()
@@ -70,6 +85,7 @@ class TravelLocationsViewController: UIViewController, MKMapViewDelegate{
             let touchPoint = gestureRecognizer.location(in: mapView)
             let coordinates = mapView.convert(touchPoint, toCoordinateFrom: mapView)
             addMapAnnotation(coordinates: coordinates)
+            savePin(coordinates: coordinates)
         }
     }
     
@@ -83,9 +99,22 @@ class TravelLocationsViewController: UIViewController, MKMapViewDelegate{
         performSegue(withIdentifier: Segues.PhotoAlbumSegue, sender: view.annotation)
     }
     
+    private func savePin(coordinates: CLLocationCoordinate2D) -> Pin {
+        let pin = Pin(context: coreData.persistentContainer.viewContext)
+        pin.lat = coordinates.latitude
+        pin.lng = coordinates.longitude
+        coreData.saveContext()
+        pins.append(pin)
+        return pin;
+    }
+    
+    func getSavedPins() -> [Pin] {
+        return try! coreData.persistentContainer.viewContext.fetch(Pin.fetchRequest())
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == Segues.PhotoAlbumSegue {
-            let viewController = segue.destination as! PhotoAlbumViewController
+            _ = segue.destination as! PhotoAlbumViewController
             //TODO send selected location to photo album
         }
     }
