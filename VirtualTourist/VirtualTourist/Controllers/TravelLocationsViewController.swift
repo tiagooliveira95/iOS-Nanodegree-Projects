@@ -17,7 +17,6 @@ class TravelLocationsViewController: UIViewController, MKMapViewDelegate{
         mapView.delegate = self
         loadMapPostion()
         setGestureRecognizer()
-
     }
     
     
@@ -78,5 +77,16 @@ class TravelLocationsViewController: UIViewController, MKMapViewDelegate{
         let annotation = MKPointAnnotation()
         annotation.coordinate = coordinates
         mapView.addAnnotation(annotation)
+    }
+    
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        performSegue(withIdentifier: Segues.PhotoAlbumSegue, sender: view.annotation)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == Segues.PhotoAlbumSegue {
+            let viewController = segue.destination as! PhotoAlbumViewController
+            //TODO send selected location to photo album
+        }
     }
 }

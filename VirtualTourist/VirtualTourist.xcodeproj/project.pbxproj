@@ -16,6 +16,8 @@
 		E875824F245B7D88002A8481 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E875824D245B7D88002A8481 /* LaunchScreen.storyboard */; };
 		E8758258245B80DE002A8481 /* TravelLocationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8758257245B80DE002A8481 /* TravelLocationsViewController.swift */; };
 		E875825B245B8B61002A8481 /* UserDefaultsKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = E875825A245B8B61002A8481 /* UserDefaultsKeys.swift */; };
+		E875825D245BB5D5002A8481 /* PhotoAlbumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E875825C245BB5D5002A8481 /* PhotoAlbumViewController.swift */; };
+		E8758260245BBB68002A8481 /* Segues.swift in Sources */ = {isa = PBXBuildFile; fileRef = E875825F245BBB68002A8481 /* Segues.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +32,8 @@
 		E8758250245B7D88002A8481 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E8758257245B80DE002A8481 /* TravelLocationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelLocationsViewController.swift; sourceTree = "<group>"; };
 		E875825A245B8B61002A8481 /* UserDefaultsKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsKeys.swift; sourceTree = "<group>"; };
+		E875825C245BB5D5002A8481 /* PhotoAlbumViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoAlbumViewController.swift; sourceTree = "<group>"; };
+		E875825F245BBB68002A8481 /* Segues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Segues.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +84,7 @@
 			isa = PBXGroup;
 			children = (
 				E8758257245B80DE002A8481 /* TravelLocationsViewController.swift */,
+				E875825C245BB5D5002A8481 /* PhotoAlbumViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -88,6 +93,7 @@
 			isa = PBXGroup;
 			children = (
 				E875825A245B8B61002A8481 /* UserDefaultsKeys.swift */,
+				E875825F245BBB68002A8481 /* Segues.swift */,
 			);
 			path = Constants;
 			sourceTree = "<group>";
@@ -164,7 +170,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				E875824A245B7D83002A8481 /* VirtualTourist.xcdatamodeld in Sources */,
+				E875825D245BB5D5002A8481 /* PhotoAlbumViewController.swift in Sources */,
 				E8758244245B7D83002A8481 /* ViewController.swift in Sources */,
+				E8758260245BBB68002A8481 /* Segues.swift in Sources */,
 				E8758240245B7D83002A8481 /* AppDelegate.swift in Sources */,
 				E8758258245B80DE002A8481 /* TravelLocationsViewController.swift in Sources */,
 				E875825B245B8B61002A8481 /* UserDefaultsKeys.swift in Sources */,
