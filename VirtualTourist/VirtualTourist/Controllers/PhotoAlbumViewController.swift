@@ -17,7 +17,10 @@ class PhotoAlbumViewController: UIViewController{
     @IBOutlet weak var mapView: MKMapView!
     
     override func viewWillAppear(_ animated: Bool) {
-        addMapAnnotation(coordinates: CLLocationCoordinate2D(latitude: mPin.lat, longitude: mPin.lng))
+        let coord = CLLocationCoordinate2D(latitude: mPin.lat, longitude: mPin.lng)
+        addMapAnnotation(coordinates: coord)
+        
+        print(FlickrProvider().getGeoUrl(coordinates: coord))
     }
     
     func addMapAnnotation(coordinates: CLLocationCoordinate2D) {
