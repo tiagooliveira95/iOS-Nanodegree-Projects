@@ -86,4 +86,14 @@ class FlickrProvider{
         }
         task.resume()
     }
+    
+    func getPhotoDownloadURL(photo: Photo)-> URL {
+        var photoUrl = URLComponents()
+        photoUrl.scheme = "https"
+        photoUrl.host = "farm\(photo.farm).staticflickr.com"
+        photoUrl.path = "/\(photo.server)/\(photo.id)_\(photo.secret)_q.jpg"
+        let url: URL? = photoUrl.url
+        print("Phoyo URL: \(url?.absoluteString ?? "nil") ") // Debug
+        return url!
+    }
 }

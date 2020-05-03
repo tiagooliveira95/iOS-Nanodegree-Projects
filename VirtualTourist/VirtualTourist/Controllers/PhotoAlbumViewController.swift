@@ -30,6 +30,8 @@ class PhotoAlbumViewController: UIViewController{
             print("photo: \(photos!.photo.count)")
             print("pages: \(photos!.pages)")
             print("perpage: \(photos!.perpage)")
+            
+            print(FlickrProvider().getPhotoDownloadURL(photo: photos!.photo[0]))
 
         }
     }
