@@ -21,6 +21,17 @@ class PhotoAlbumViewController: UIViewController{
         addMapAnnotation(coordinates: coord)
         
         print(FlickrProvider().getGeoUrl(coordinates: coord))
+        
+        FlickrProvider().getGeolocationData(coordinates: coord){ bool, photos, error in
+            print("Success: \(bool) error: \(error?.localizedDescription ?? "nil")")
+            //TODO show error to the user!
+            guard bool else { return }
+            //Debug
+            print("photo: \(photos!.photo.count)")
+            print("pages: \(photos!.pages)")
+            print("perpage: \(photos!.perpage)")
+
+        }
     }
     
     func addMapAnnotation(coordinates: CLLocationCoordinate2D) {
