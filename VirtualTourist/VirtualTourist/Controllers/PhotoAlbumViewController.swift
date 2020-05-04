@@ -13,6 +13,7 @@ class PhotoAlbumViewController: UIViewController, UICollectionViewDataSource , U
     
     var mPin: Pin!
     var photos: [Photo]! = []
+    var selectedPage = 1
 
     @IBOutlet weak var newCollectionButton: UIBarButtonItem!
     @IBOutlet weak var noImagesLabel: UILabel!
@@ -31,23 +32,31 @@ class PhotoAlbumViewController: UIViewController, UICollectionViewDataSource , U
     }
     
     
-    func loadImages(coord: CLLocationCoordinate2D) {
+    func loadImages(coord: CLLocationCoordinate2D, page: Int = 1) {
         self.showActivityLoadingIndicatorView("Downloading images...")
         newCollectionButton.isEnabled = false
         
-        FlickrProvider().getGeolocationData(coordinates: coord){ bool, photos, error in
+        FlickrProvider().getGeolocationData(coordinates: coord, page: String(page)){ bool, photos, error in
             print("Success: \(bool) error: \(error?.localizedDescription ?? "nil")")
             //TODO show error to the user!
-            guard bool else { return }
+            guard bool else {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {self.dismiss(animated: true)}
+                return
+            }
             //Debug
             print("photo: \(photos!.photo.count)")
             print("pages: \(photos!.pages)")
             print("perpage: \(photos!.perpage)")
             
+            //reset page index, if page count == page, the selected page will be set to 0, so when the next collection button is pressed the next page will be 1
+            if photos!.pages == page {
+                self.selectedPage = 0
+            }
+            
             print(FlickrProvider().getPhotoDownloadURL(photo: photos!.photo[0]))
             self.photos = photos!.photo
            
-            DispatchQueue.main.async {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 if photos!.photo.count > 0  {
                     self.noImagesLabel.isHidden = true
                 }
@@ -89,7 +98,15 @@ class PhotoAlbumViewController: UIViewController, UICollectionViewDataSource , U
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         DispatchQueue.main.async {
-            //TODO
+            self.photos.remove(at: indexPath.row)
+            self.collectionView.deleteItems(at: [indexPath])
         }
+    }
+    
+    @IBAction func onNewLocationClicked(_ sender: Any) {
+        photos = []
+        collectionView.reloadData()
+        selectedPage += 1
+        loadImages(coord:CLLocationCoordinate2D(latitude: mPin.lat, longitude: mPin.lng), page: selectedPage)
     }
 }
