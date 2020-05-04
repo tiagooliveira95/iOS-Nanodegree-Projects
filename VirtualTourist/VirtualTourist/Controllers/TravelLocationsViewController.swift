@@ -31,7 +31,7 @@ class TravelLocationsViewController: UIViewController, MKMapViewDelegate{
 
         for pin in pins {
             let coordinates = CLLocationCoordinate2D(latitude: CLLocationDegrees(exactly: pin.lat)!, longitude: CLLocationDegrees(exactly: pin.lng)!)
-            addMapAnnotation(coordinates: coordinates)
+            addMapAnnotation(coordinates: coordinates, pin: pin)
         }
     }
     
@@ -84,14 +84,14 @@ class TravelLocationsViewController: UIViewController, MKMapViewDelegate{
         if gestureRecognizer.state == .ended {
             let touchPoint = gestureRecognizer.location(in: mapView)
             let coordinates = mapView.convert(touchPoint, toCoordinateFrom: mapView)
-            addMapAnnotation(coordinates: coordinates)
-            savePin(coordinates: coordinates)
+            addMapAnnotation(coordinates: coordinates, pin: savePin(coordinates: coordinates))
         }
     }
     
-    func addMapAnnotation(coordinates: CLLocationCoordinate2D) {
-        let annotation = MKPointAnnotation()
+    func addMapAnnotation(coordinates: CLLocationCoordinate2D, pin: Pin) {
+        let annotation = MyCostumMapPin()
         annotation.coordinate = coordinates
+        annotation.pin = pin
         mapView.addAnnotation(annotation)
     }
     
@@ -116,11 +116,9 @@ class TravelLocationsViewController: UIViewController, MKMapViewDelegate{
         if segue.identifier == Segues.PhotoAlbumSegue {
             print(type(of: sender))
             let photoAlbumVC = segue.destination as! PhotoAlbumViewController
-            let anotation = (sender as! MKPointAnnotation)
-            let pin = Pin(context: coreData.persistentContainer.viewContext)
-            pin.lat = anotation.coordinate.latitude
-            pin.lng = anotation.coordinate.longitude
-            photoAlbumVC.mPin = pin
+            let anotation = (sender as! MyCostumMapPin)
+            photoAlbumVC.mPin = anotation.pin!
         }
     }
 }
+

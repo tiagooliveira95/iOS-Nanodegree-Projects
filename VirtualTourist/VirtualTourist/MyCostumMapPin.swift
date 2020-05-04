@@ -1,16 +1,13 @@
 //
-//  Pin+CoreDataClass.swift
+//  MyCostumMapPin.swift
 //  VirtualTourist
 //
 //  Created by Tiago Oliveira on 04/05/2020.
 //  Copyright © 2020 Tiago Oliveira. All rights reserved.
 //
-//
 
-import Foundation
-import CoreData
+import MapKit
 
-@objc(Pin)
-public class Pin: NSManagedObject {
-
+class MyCostumMapPin: MKPointAnnotation {
+    var pin: Pin?
 }

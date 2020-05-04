@@ -1,5 +1,5 @@
 //
-//  Pin+CoreDataClass.swift
+//  PhotoCD+CoreDataClass.swift
 //  VirtualTourist
 //
 //  Created by Tiago Oliveira on 04/05/2020.
@@ -10,7 +10,7 @@
 import Foundation
 import CoreData
 
-@objc(Pin)
-public class Pin: NSManagedObject {
+@objc(PhotoCD)
+public class PhotoCD: NSManagedObject {
 
 }

@@ -10,7 +10,9 @@ import UIKit
 import MapKit
 
 class PhotoAlbumViewController: UIViewController, UICollectionViewDataSource , UICollectionViewDelegate {
-    
+
+    let coreData = (UIApplication.shared.delegate as! AppDelegate)
+
     var mPin: Pin!
     var photos: [Photo]! = []
     var selectedPage = 1
@@ -28,19 +30,26 @@ class PhotoAlbumViewController: UIViewController, UICollectionViewDataSource , U
         addMapAnnotation(coordinates: coord)
         collectionView.delegate = self
         collectionView.dataSource = self
-        loadImages(coord: coord)
+        
+        if mPin.hasPhotos {
+            loadImagesFromCD()
+        }else{
+            loadImagesFromCloud(coord: coord)
+        }
     }
     
-    
-    func loadImages(coord: CLLocationCoordinate2D, page: Int = 1) {
+    func loadImagesFromCloud(coord: CLLocationCoordinate2D, page: Int = 1) {
+        print("loading from cloud")
+        
         self.showActivityLoadingIndicatorView("Downloading images...")
         newCollectionButton.isEnabled = false
         
         FlickrProvider().getGeolocationData(coordinates: coord, page: String(page)){ bool, photos, error in
             print("Success: \(bool) error: \(error?.localizedDescription ?? "nil")")
-            //TODO show error to the user!
+
             guard bool else {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {self.dismiss(animated: true)}
+                //TODO show error to the user!
                 return
             }
             //Debug
@@ -49,20 +58,87 @@ class PhotoAlbumViewController: UIViewController, UICollectionViewDataSource , U
             print("perpage: \(photos!.perpage)")
             
             //reset page index, if page count == page, the selected page will be set to 0, so when the next collection button is pressed the next page will be 1
+            
+            //TODO maybe this is no longer needed since i have already implemented CD, check later!.
             if photos!.pages == page {
                 self.selectedPage = 0
+            } else {
+                self.mPin.lastPageSaved = Int16(page)
             }
             
             print(FlickrProvider().getPhotoDownloadURL(photo: photos!.photo[0]))
             self.photos = photos!.photo
-           
+            
+            for (i, photo) in self.photos.enumerated() {
+                let photoURL = FlickrProvider().getPhotoDownloadURL(photo: photo)
+               
+                FlickrProvider().downloadPhoto(url: photoURL){ image in
+                    let photoCD = PhotoCD(context: self.coreData.persistentContainer.viewContext)
+                    photoCD.id = photo.id
+                    photoCD.farm = Int16(photo.farm)
+                    photoCD.imageData = image
+                    photoCD.owner = photo.owner
+                    photoCD.secret = photo.secret
+                    photoCD.server = photo.server
+                    photoCD.title = photo.title
+                    self.mPin.addToPhotos(photoCD)
+                    
+                    DispatchQueue.main.async {
+                        self.photos[i].imageData = image
+                        self.collectionView.insertItems(at: [IndexPath(row: i, section: 0)])
+                    }
+                }
+            }
+            
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 if photos!.photo.count > 0  {
                     self.noImagesLabel.isHidden = true
                 }
                 self.newCollectionButton.isEnabled = true
                 self.dismiss(animated: true)
-                self.collectionView.reloadData()
+            }
+            
+            self.mPin.hasPhotos = true
+            self.coreData.saveContext()
+           
+            //DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            //    if photos!.photo.count > 0  {
+            //        self.noImagesLabel.isHidden = true
+            //    }
+            //    self.newCollectionButton.isEnabled = true
+            //    self.dismiss(animated: true)
+            //    self.collectionView.reloadData()
+            //}
+        }
+    }
+    
+    func loadImagesFromCD(){
+        print("loading from core data :)")
+        self.newCollectionButton.isEnabled = false
+        let photosCD: [PhotoCD] = mPin.photos!.allObjects as! [PhotoCD]
+        
+        print("photos core data count: \(photosCD.count)")
+        
+        for (i, photoCD) in photosCD.enumerated() {
+            let photo = Photo(id: photoCD.id!,
+                owner: photoCD.owner!,
+                secret: photoCD.secret!,
+                server: photoCD.server!,
+                farm: Int(photoCD.farm),
+                title: photoCD.title!,
+                imageData: photoCD.imageData!
+            )
+           
+            photos.append(photo)
+            
+            DispatchQueue.main.async {
+                if self.photos!.count > 0  {
+                    self.noImagesLabel.isHidden = true
+                }
+                self.newCollectionButton.isEnabled = true
+                self.dismiss(animated: true)
+                
+                self.collectionView.insertItems(at: [IndexPath(row: i, section: 0)])
             }
         }
     }
@@ -107,6 +183,11 @@ class PhotoAlbumViewController: UIViewController, UICollectionViewDataSource , U
         photos = []
         collectionView.reloadData()
         selectedPage += 1
-        loadImages(coord:CLLocationCoordinate2D(latitude: mPin.lat, longitude: mPin.lng), page: selectedPage)
+        print("lastPage: \(String(mPin.lastPageSaved))")
+        if selectedPage < mPin.lastPageSaved {
+            loadImagesFromCD()
+        }else{
+            loadImagesFromCloud(coord:CLLocationCoordinate2D(latitude: mPin.lat, longitude: mPin.lng), page: selectedPage)
+        }
     }
 }

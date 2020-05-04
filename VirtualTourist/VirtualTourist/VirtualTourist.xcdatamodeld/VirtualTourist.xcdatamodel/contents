@@ -1,10 +1,24 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="16119" systemVersion="19D76" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="Pin" representedClassName="Pin" syncable="YES" codeGenerationType="class">
+    <entity name="PhotoCD" representedClassName="PhotoCD" syncable="YES">
+        <attribute name="farm" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="id" optional="YES" attributeType="String"/>
+        <attribute name="imageData" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES"/>
+        <attribute name="owner" optional="YES" attributeType="String"/>
+        <attribute name="secret" optional="YES" attributeType="String"/>
+        <attribute name="server" optional="YES" attributeType="String"/>
+        <attribute name="title" optional="YES" attributeType="String"/>
+        <relationship name="pin" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Pin" inverseName="photos" inverseEntity="Pin"/>
+    </entity>
+    <entity name="Pin" representedClassName="Pin" syncable="YES">
+        <attribute name="hasPhotos" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="lastPageSaved" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="lat" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="lng" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <relationship name="photos" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PhotoCD" inverseName="pin" inverseEntity="PhotoCD"/>
     </entity>
     <elements>
-        <element name="Pin" positionX="-63" positionY="-18" width="128" height="73"/>
+        <element name="PhotoCD" positionX="-54" positionY="9" width="128" height="163"/>
+        <element name="Pin" positionX="-242.65625" positionY="69.03125" width="128" height="118"/>
     </elements>
 </model>
