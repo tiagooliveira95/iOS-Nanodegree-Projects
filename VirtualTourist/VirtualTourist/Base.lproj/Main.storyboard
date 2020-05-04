@@ -72,8 +72,9 @@
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="9NJ-Y9-lhy">
                                 <rect key="frame" x="0.0" y="280" width="414" height="533"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="6fn-Bk-8Za">
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="6fn-Bk-8Za">
                                     <size key="itemSize" width="128" height="128"/>
+                                    <size key="estimatedItemSize" width="128" height="128"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -86,7 +87,7 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="IEX-ko-V6M">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PhotoAlbumViewCell" id="IEX-ko-V6M" customClass="PhotoAlbumViewCell" customModule="VirtualTourist" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="aov-NQ-Syd">
@@ -104,6 +105,9 @@
                                                 <constraint firstAttribute="trailing" secondItem="ibI-US-bZG" secondAttribute="trailing" id="pMo-fP-2Se"/>
                                             </constraints>
                                         </collectionViewCellContentView>
+                                        <connections>
+                                            <outlet property="imageView" destination="ibI-US-bZG" id="MsG-vy-V18"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
@@ -133,7 +137,9 @@
                         <barButtonItem key="backBarButtonItem" title="Ok" id="S1E-i4-gVG"/>
                     </navigationItem>
                     <connections>
+                        <outlet property="collectionView" destination="9NJ-Y9-lhy" id="8GM-bH-JW6"/>
                         <outlet property="mapView" destination="1tV-Ob-A3p" id="HZN-ih-sJU"/>
+                        <outlet property="newCollectionButton" destination="SVd-VS-WPe" id="Ana-su-9XU"/>
                         <outlet property="noImagesLabel" destination="7c7-KM-pTk" id="Msk-dp-y6W"/>
                     </connections>
                 </viewController>

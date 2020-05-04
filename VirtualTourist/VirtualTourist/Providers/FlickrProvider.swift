@@ -74,7 +74,7 @@ class FlickrProvider{
             
             do {
                 let flickrResponse = try decoder.decode(FlickrResponse.self, from: dataRange)
-                if flickrResponse.stat == "ok"{
+                if flickrResponse.stat == "ok" {
                     completionHandler(true,flickrResponse.photos, nil)
                 }else{
                     completionHandler(false, nil, nil)
@@ -91,9 +91,19 @@ class FlickrProvider{
         var photoUrl = URLComponents()
         photoUrl.scheme = "https"
         photoUrl.host = "farm\(photo.farm).staticflickr.com"
-        photoUrl.path = "/\(photo.server)/\(photo.id)_\(photo.secret)_q.jpg"
+        photoUrl.path = "/\(photo.server)/\(photo.id)_\(photo.secret)_s.jpg"
         let url: URL? = photoUrl.url
         print("Phoyo URL: \(url?.absoluteString ?? "nil") ") // Debug
         return url!
+    }
+    
+    func downloadPhoto(url: URL, completionHandler: @escaping (_ image: Data?)->()) {
+        URLSession.shared.dataTask(with: URL(string: url.absoluteString)!) { (image, response, error) in
+            guard error == nil else {
+                completionHandler(nil)
+                return
+            }
+            completionHandler(image)
+        }.resume()
     }
 }

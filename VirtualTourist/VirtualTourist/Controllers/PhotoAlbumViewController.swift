@@ -9,18 +9,31 @@
 import UIKit
 import MapKit
 
-class PhotoAlbumViewController: UIViewController{
+class PhotoAlbumViewController: UIViewController, UICollectionViewDataSource , UICollectionViewDelegate {
     
     var mPin: Pin!
+    var photos: [Photo]! = []
 
+    @IBOutlet weak var newCollectionButton: UIBarButtonItem!
     @IBOutlet weak var noImagesLabel: UILabel!
     @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var collectionView: UICollectionView!
+    
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        super.viewDidLoad()
         let coord = CLLocationCoordinate2D(latitude: mPin.lat, longitude: mPin.lng)
         addMapAnnotation(coordinates: coord)
-        
-        print(FlickrProvider().getGeoUrl(coordinates: coord))
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        loadImages(coord: coord)
+    }
+    
+    
+    func loadImages(coord: CLLocationCoordinate2D) {
+        self.showActivityLoadingIndicatorView("Downloading images...")
+        newCollectionButton.isEnabled = false
         
         FlickrProvider().getGeolocationData(coordinates: coord){ bool, photos, error in
             print("Success: \(bool) error: \(error?.localizedDescription ?? "nil")")
@@ -32,7 +45,16 @@ class PhotoAlbumViewController: UIViewController{
             print("perpage: \(photos!.perpage)")
             
             print(FlickrProvider().getPhotoDownloadURL(photo: photos!.photo[0]))
-
+            self.photos = photos!.photo
+           
+            DispatchQueue.main.async {
+                if photos!.photo.count > 0  {
+                    self.noImagesLabel.isHidden = true
+                }
+                self.newCollectionButton.isEnabled = true
+                self.dismiss(animated: true)
+                self.collectionView.reloadData()
+            }
         }
     }
     
@@ -49,4 +71,25 @@ class PhotoAlbumViewController: UIViewController{
         mapView.setRegion(region, animated: true)
     }
     
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return photos.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Identifiers.PhotoAlbumViewCellIdentifier, for: indexPath) as! PhotoAlbumViewCell
+    
+        let photo = photos[indexPath.row];
+        
+        cell.setPhoto(photo: photo)
+        
+        return cell
+    }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        DispatchQueue.main.async {
+            //TODO
+        }
+    }
 }
