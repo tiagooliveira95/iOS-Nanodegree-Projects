@@ -5,6 +5,7 @@
         <attribute name="id" optional="YES" attributeType="String"/>
         <attribute name="imageData" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES"/>
         <attribute name="owner" optional="YES" attributeType="String"/>
+        <attribute name="page" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="secret" optional="YES" attributeType="String"/>
         <attribute name="server" optional="YES" attributeType="String"/>
         <attribute name="title" optional="YES" attributeType="String"/>
@@ -18,7 +19,7 @@
         <relationship name="photos" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PhotoCD" inverseName="pin" inverseEntity="PhotoCD"/>
     </entity>
     <elements>
-        <element name="PhotoCD" positionX="-54" positionY="9" width="128" height="163"/>
-        <element name="Pin" positionX="-242.65625" positionY="69.03125" width="128" height="118"/>
+        <element name="PhotoCD" positionX="-54" positionY="9" width="128" height="178"/>
+        <element name="Pin" positionX="-243.1796875" positionY="53.8359375" width="128" height="118"/>
     </elements>
 </model>

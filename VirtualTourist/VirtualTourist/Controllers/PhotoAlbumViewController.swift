@@ -8,6 +8,8 @@
 
 import UIKit
 import MapKit
+import CoreData
+
 
 class PhotoAlbumViewController: UIViewController, UICollectionViewDataSource , UICollectionViewDelegate {
 
@@ -81,6 +83,7 @@ class PhotoAlbumViewController: UIViewController, UICollectionViewDataSource , U
                     photoCD.secret = photo.secret
                     photoCD.server = photo.server
                     photoCD.title = photo.title
+                    photoCD.page = Int16(page)
                     self.mPin.addToPhotos(photoCD)
                     
                     DispatchQueue.main.async {
@@ -112,12 +115,16 @@ class PhotoAlbumViewController: UIViewController, UICollectionViewDataSource , U
         }
     }
     
-    func loadImagesFromCD(){
+    func loadImagesFromCD(page: Int = 1){
         print("loading from core data :)")
         self.newCollectionButton.isEnabled = false
-        let photosCD: [PhotoCD] = mPin.photos!.allObjects as! [PhotoCD]
         
-        print("photos core data count: \(photosCD.count)")
+        //Query CD for photos at page = x
+        let fetch:NSFetchRequest<PhotoCD> = PhotoCD.fetchRequest()
+        fetch.predicate = NSPredicate(format: "page == %@", String(Int16(page)))
+        let photosCD: [PhotoCD] = try! self.coreData.persistentContainer.viewContext.fetch(fetch)
+                
+        print("photos CoreData count: \(photosCD.count), Page: \(String(Int16(page)))")
         
         for (i, photoCD) in photosCD.enumerated() {
             let photo = Photo(id: photoCD.id!,
@@ -128,7 +135,7 @@ class PhotoAlbumViewController: UIViewController, UICollectionViewDataSource , U
                 title: photoCD.title!,
                 imageData: photoCD.imageData!
             )
-           
+                       
             photos.append(photo)
             
             DispatchQueue.main.async {
@@ -174,6 +181,11 @@ class PhotoAlbumViewController: UIViewController, UICollectionViewDataSource , U
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         DispatchQueue.main.async {
+            let fetch:NSFetchRequest<PhotoCD> = PhotoCD.fetchRequest()
+            fetch.predicate = NSPredicate(format: "id == %@", self.photos[indexPath.row].id)
+            let delPhoto = try! self.coreData.persistentContainer.viewContext.fetch(fetch).first
+            self.coreData.persistentContainer.viewContext.delete(delPhoto!)
+
             self.photos.remove(at: indexPath.row)
             self.collectionView.deleteItems(at: [indexPath])
         }
@@ -185,7 +197,7 @@ class PhotoAlbumViewController: UIViewController, UICollectionViewDataSource , U
         selectedPage += 1
         print("lastPage: \(String(mPin.lastPageSaved))")
         if selectedPage < mPin.lastPageSaved {
-            loadImagesFromCD()
+            loadImagesFromCD(page: selectedPage)
         }else{
             loadImagesFromCloud(coord:CLLocationCoordinate2D(latitude: mPin.lat, longitude: mPin.lng), page: selectedPage)
         }

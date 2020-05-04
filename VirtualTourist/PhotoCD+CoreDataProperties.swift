@@ -13,11 +13,12 @@ import CoreData
 
 extension PhotoCD {
 
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<PhotoCD> {
-        return NSFetchRequest<PhotoCD>(entityName: "PhotoCD")
-    }
+   @nonobjc public class func fetchRequest() -> NSFetchRequest<PhotoCD> {
+             return NSFetchRequest<PhotoCD>(entityName: "PhotoCD")
+         }
 
     @NSManaged public var farm: Int16
+    @NSManaged public var page: Int16
     @NSManaged public var id: String?
     @NSManaged public var imageData: Data?
     @NSManaged public var owner: String?

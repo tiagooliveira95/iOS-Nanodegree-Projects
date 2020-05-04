@@ -12,5 +12,6 @@ import CoreData
 
 @objc(PhotoCD)
 public class PhotoCD: NSManagedObject {
+   
 
 }
