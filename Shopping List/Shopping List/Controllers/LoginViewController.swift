@@ -22,6 +22,7 @@ class LoginViewController: UIViewController {
         authHandle = Auth.auth().addStateDidChangeListener { (auth, user) in
             if user != nil {
                 print("user is logged in")
+                self.performSegue(withIdentifier: SeguesConstants.LoginToShoppingListSegue, sender: nil)
             }
         }
     }
@@ -32,12 +33,22 @@ class LoginViewController: UIViewController {
     
     @IBAction func onLoginButtonClicked(_ sender: Any) {
         //TODO CHECK DATA FIRST!
-        
         Auth.auth().signIn(withEmail: emailField.text!, password: passwordField.text!) { [weak self] authResult, error in
-          guard let strongSelf = self else { return }
-          // ...
+            guard let strongSelf = self else { return }
+            if let error = error {
+                strongSelf.showMessagePrompt(error: error.localizedDescription)
+              return
+            }
+            strongSelf.performSegue(withIdentifier: SeguesConstants.LoginToShoppingListSegue, sender: nil)
         }
     }
     
+    func showMessagePrompt(error: String){
+        //TODO
+        print(error)
+    }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        //TODO
+    }
 }

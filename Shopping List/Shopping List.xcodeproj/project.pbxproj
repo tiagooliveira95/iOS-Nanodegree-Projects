@@ -10,6 +10,8 @@
 		AF3E4D45E48352FBAF1B291F /* Pods_Shopping_List.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 373FA53E0B8989E694901AE9 /* Pods_Shopping_List.framework */; };
 		E847317D2461C05F00C33DB3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E847317C2461C05F00C33DB3 /* GoogleService-Info.plist */; };
 		E8D689652461C456000A27A2 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8D689642461C456000A27A2 /* RegisterViewController.swift */; };
+		E8D689682461CE71000A27A2 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8D689672461CE71000A27A2 /* UserData.swift */; };
+		E8D6896B2461DD4B000A27A2 /* SeguesConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8D6896A2461DD4B000A27A2 /* SeguesConstants.swift */; };
 		E8DE68412460FD0F00047D12 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8DE68402460FD0F00047D12 /* AppDelegate.swift */; };
 		E8DE68432460FD0F00047D12 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8DE68422460FD0F00047D12 /* SceneDelegate.swift */; };
 		E8DE68452460FD0F00047D12 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8DE68442460FD0F00047D12 /* ViewController.swift */; };
@@ -26,6 +28,8 @@
 		5AB9370395F1B5A98F446C5F /* Pods-Shopping List.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Shopping List.debug.xcconfig"; path = "Target Support Files/Pods-Shopping List/Pods-Shopping List.debug.xcconfig"; sourceTree = "<group>"; };
 		E847317C2461C05F00C33DB3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E8D689642461C456000A27A2 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
+		E8D689672461CE71000A27A2 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
+		E8D6896A2461DD4B000A27A2 /* SeguesConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeguesConstants.swift; sourceTree = "<group>"; };
 		E8DE683D2460FD0F00047D12 /* Shopping List.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Shopping List.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E8DE68402460FD0F00047D12 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E8DE68422460FD0F00047D12 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -67,6 +71,22 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		E8D689662461CE45000A27A2 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				E8D689672461CE71000A27A2 /* UserData.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		E8D689692461DD39000A27A2 /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				E8D6896A2461DD4B000A27A2 /* SeguesConstants.swift */,
+			);
+			path = Constants;
+			sourceTree = "<group>";
+		};
 		E8DE68342460FD0F00047D12 = {
 			isa = PBXGroup;
 			children = (
@@ -88,6 +108,8 @@
 		E8DE683F2460FD0F00047D12 /* Shopping List */ = {
 			isa = PBXGroup;
 			children = (
+				E8D689692461DD39000A27A2 /* Constants */,
+				E8D689662461CE45000A27A2 /* Models */,
 				E8DE685724611A1300047D12 /* Controllers */,
 				E8DE68402460FD0F00047D12 /* AppDelegate.swift */,
 				E8DE68422460FD0F00047D12 /* SceneDelegate.swift */,
@@ -228,7 +250,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				E8DE68452460FD0F00047D12 /* ViewController.swift in Sources */,
+				E8D6896B2461DD4B000A27A2 /* SeguesConstants.swift in Sources */,
 				E8DE684B2460FD0F00047D12 /* Shopping_List.xcdatamodeld in Sources */,
+				E8D689682461CE71000A27A2 /* UserData.swift in Sources */,
 				E8DE68412460FD0F00047D12 /* AppDelegate.swift in Sources */,
 				E8D689652461C456000A27A2 /* RegisterViewController.swift in Sources */,
 				E8DE685924611A2300047D12 /* LoginViewController.swift in Sources */,
