@@ -97,15 +97,23 @@
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ibI-US-bZG">
                                                     <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
                                                 </imageView>
+                                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="cKh-Bq-qz7">
+                                                    <rect key="frame" x="54" y="54" width="20" height="20"/>
+                                                </activityIndicatorView>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="cKh-Bq-qz7" firstAttribute="leading" secondItem="aov-NQ-Syd" secondAttribute="leading" constant="54" id="4VC-5G-NDf"/>
+                                                <constraint firstAttribute="bottom" secondItem="cKh-Bq-qz7" secondAttribute="bottom" constant="54" id="9Jd-jS-a6a"/>
+                                                <constraint firstItem="cKh-Bq-qz7" firstAttribute="top" secondItem="aov-NQ-Syd" secondAttribute="top" constant="54" id="NRO-60-mzB"/>
                                                 <constraint firstItem="ibI-US-bZG" firstAttribute="top" secondItem="aov-NQ-Syd" secondAttribute="top" id="Uo6-0H-sdY"/>
                                                 <constraint firstAttribute="bottom" secondItem="ibI-US-bZG" secondAttribute="bottom" id="ZcM-Oo-Cee"/>
                                                 <constraint firstItem="ibI-US-bZG" firstAttribute="leading" secondItem="aov-NQ-Syd" secondAttribute="leading" id="avs-us-SVo"/>
                                                 <constraint firstAttribute="trailing" secondItem="ibI-US-bZG" secondAttribute="trailing" id="pMo-fP-2Se"/>
+                                                <constraint firstAttribute="trailing" secondItem="cKh-Bq-qz7" secondAttribute="trailing" constant="54" id="yGR-zb-ZT8"/>
                                             </constraints>
                                         </collectionViewCellContentView>
                                         <connections>
+                                            <outlet property="activityLoadingIndicator" destination="cKh-Bq-qz7" id="5Rc-YC-zlJ"/>
                                             <outlet property="imageView" destination="ibI-US-bZG" id="MsG-vy-V18"/>
                                         </connections>
                                     </collectionViewCell>

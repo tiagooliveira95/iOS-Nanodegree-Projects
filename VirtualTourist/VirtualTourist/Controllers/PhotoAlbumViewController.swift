@@ -18,22 +18,21 @@ class PhotoAlbumViewController: UIViewController, UICollectionViewDataSource , U
     var mPin: Pin!
     var photos: [Photo]! = []
     var selectedPage = 1
+    var correntLocationPagesCount: Int! = 1
 
     @IBOutlet weak var newCollectionButton: UIBarButtonItem!
     @IBOutlet weak var noImagesLabel: UILabel!
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var collectionView: UICollectionView!
     
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        super.viewDidLoad()
+    override func viewDidAppear(_ animated: Bool) {
         let coord = CLLocationCoordinate2D(latitude: mPin.lat, longitude: mPin.lng)
         addMapAnnotation(coordinates: coord)
         collectionView.delegate = self
         collectionView.dataSource = self
         
         if mPin.hasPhotos {
+            correntLocationPagesCount = Int(mPin.maxPages)
             loadImagesFromCD()
         }else{
             loadImagesFromCloud(coord: coord)
@@ -41,7 +40,11 @@ class PhotoAlbumViewController: UIViewController, UICollectionViewDataSource , U
     }
     
     func loadImagesFromCloud(coord: CLLocationCoordinate2D, page: Int = 1) {
+        self.dismiss(animated: true) // dismiss ui alert
+
         print("loading from cloud")
+        self.photos = []
+        self.collectionView.reloadData()
         
         self.showActivityLoadingIndicatorView("Downloading images...")
         newCollectionButton.isEnabled = false
@@ -50,25 +53,24 @@ class PhotoAlbumViewController: UIViewController, UICollectionViewDataSource , U
             print("Success: \(bool) error: \(error?.localizedDescription ?? "nil")")
 
             guard bool else {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {self.dismiss(animated: true)}
-                //TODO show error to the user!
+                DispatchQueue.main.asyncAfter(deadline: .now() + 5.5) {
+                    self.dismiss(animated: true)
+                    self.showUIAlert(title: "Error", message: "Please, double check your internet connection", style: .alert, actions: [], viewController: nil)
+                    self.newCollectionButton.isEnabled = true
+                }
                 return
             }
-            //Debug
-            print("photo: \(photos!.photo.count)")
-            print("pages: \(photos!.pages)")
-            print("perpage: \(photos!.perpage)")
             
-            //reset page index, if page count == page, the selected page will be set to 0, so when the next collection button is pressed the next page will be 1
+            //used to check for page overflow
+            self.correntLocationPagesCount = photos!.pages
+            self.mPin.maxPages = Int16(photos!.pages)
             
-            //TODO maybe this is no longer needed since i have already implemented CD, check later!.
-            if photos!.pages == page {
-                self.selectedPage = 0
-            } else {
-                self.mPin.lastPageSaved = Int16(page)
-            }
+            self.mPin.lastPageSaved = Int16(page)
             
-            print(FlickrProvider().getPhotoDownloadURL(photo: photos!.photo[0]))
+            
+            print("photos cloud, Page count: \(photos!.pages), Selected Page: \(String(page)), Image count \(photos!.photo.count) ")
+
+            
             self.photos = photos!.photo
             
             for (i, photo) in self.photos.enumerated() {
@@ -99,10 +101,12 @@ class PhotoAlbumViewController: UIViewController, UICollectionViewDataSource , U
                 }
                 self.newCollectionButton.isEnabled = true
                 self.dismiss(animated: true)
+               
+                self.mPin.hasPhotos = true
+                self.coreData.saveContext()
             }
             
-            self.mPin.hasPhotos = true
-            self.coreData.saveContext()
+            
            
             //DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             //    if photos!.photo.count > 0  {
@@ -117,11 +121,13 @@ class PhotoAlbumViewController: UIViewController, UICollectionViewDataSource , U
     
     func loadImagesFromCD(page: Int = 1){
         print("loading from core data :)")
+        self.showActivityLoadingIndicatorView("Loading images...", animated: false)
+
         self.newCollectionButton.isEnabled = false
         
         //Query CD for photos at page = x
-        let fetch:NSFetchRequest<PhotoCD> = PhotoCD.fetchRequest()
-        fetch.predicate = NSPredicate(format: "page == %@", String(Int16(page)))
+        let fetch: NSFetchRequest<PhotoCD> = PhotoCD.fetchRequest()
+        fetch.predicate = NSPredicate(format: "pin == %@ && page == %@", mPin, String(Int16(page)))
         let photosCD: [PhotoCD] = try! self.coreData.persistentContainer.viewContext.fetch(fetch)
                 
         print("photos CoreData count: \(photosCD.count), Page: \(String(Int16(page)))")
@@ -138,16 +144,15 @@ class PhotoAlbumViewController: UIViewController, UICollectionViewDataSource , U
                        
             photos.append(photo)
             
-            DispatchQueue.main.async {
-                if self.photos!.count > 0  {
-                    self.noImagesLabel.isHidden = true
-                }
-                self.newCollectionButton.isEnabled = true
-                self.dismiss(animated: true)
-                
-                self.collectionView.insertItems(at: [IndexPath(row: i, section: 0)])
+            if self.photos!.count > 0  {
+                self.noImagesLabel.isHidden = true
             }
+            self.newCollectionButton.isEnabled = true
+            self.dismiss(animated: true)
+            self.collectionView.insertItems(at: [IndexPath(row: i, section: 0)])
+           
         }
+        self.dismiss(animated: true)
     }
     
     func addMapAnnotation(coordinates: CLLocationCoordinate2D) {
@@ -163,18 +168,14 @@ class PhotoAlbumViewController: UIViewController, UICollectionViewDataSource , U
         mapView.setRegion(region, animated: true)
     }
     
-    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return photos.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Identifiers.PhotoAlbumViewCellIdentifier, for: indexPath) as! PhotoAlbumViewCell
-    
-        let photo = photos[indexPath.row];
-        
+        let photo = photos[indexPath.row]
         cell.setPhoto(photo: photo)
-        
         return cell
     }
     
@@ -194,9 +195,16 @@ class PhotoAlbumViewController: UIViewController, UICollectionViewDataSource , U
     @IBAction func onNewLocationClicked(_ sender: Any) {
         photos = []
         collectionView.reloadData()
-        selectedPage += 1
+        
         print("lastPage: \(String(mPin.lastPageSaved))")
-        if selectedPage < mPin.lastPageSaved {
+        selectedPage += 1
+        
+        //check if we exceeded the max page count, if so reset it back to 1
+        if self.correntLocationPagesCount < selectedPage{
+            selectedPage = 1
+        }
+        
+        if selectedPage <= mPin.lastPageSaved {
             loadImagesFromCD(page: selectedPage)
         }else{
             loadImagesFromCloud(coord:CLLocationCoordinate2D(latitude: mPin.lat, longitude: mPin.lng), page: selectedPage)

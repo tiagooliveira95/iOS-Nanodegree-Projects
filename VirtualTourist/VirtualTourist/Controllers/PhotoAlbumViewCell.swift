@@ -11,14 +11,7 @@ import UIKit
 class PhotoAlbumViewCell: UICollectionViewCell{
     
     @IBOutlet weak var imageView: UIImageView!
-
-
-    func setImage(image: UIImage) {
-        DispatchQueue.main.async {
-            self.imageView.image = image
-            self.imageView.isHidden = false;
-        }
-    }
+    @IBOutlet weak var activityLoadingIndicator: UIActivityIndicatorView!
     
     func setPhoto(photo: Photo) {
         let photoURL = FlickrProvider().getPhotoDownloadURL(photo: photo)
@@ -27,11 +20,10 @@ class PhotoAlbumViewCell: UICollectionViewCell{
             DispatchQueue.main.async {
                 if let image = UIImage(data: imageData!){
                     self.imageView.image = image
-                    //print("downloaded")
+                    self.activityLoadingIndicator.isHidden = true
                 }else{
                     self.imageView.isHidden = false;
                 }
-                //print("hidden")
             }
         }
     }

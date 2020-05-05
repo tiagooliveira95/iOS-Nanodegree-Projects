@@ -16,10 +16,11 @@
         <attribute name="lastPageSaved" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="lat" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="lng" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="maxPages" optional="YES" attributeType="Integer 16" defaultValueString="1" usesScalarValueType="YES"/>
         <relationship name="photos" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PhotoCD" inverseName="pin" inverseEntity="PhotoCD"/>
     </entity>
     <elements>
         <element name="PhotoCD" positionX="-54" positionY="9" width="128" height="178"/>
-        <element name="Pin" positionX="-243.1796875" positionY="53.8359375" width="128" height="118"/>
+        <element name="Pin" positionX="-243.1796875" positionY="53.8359375" width="128" height="133"/>
     </elements>
 </model>

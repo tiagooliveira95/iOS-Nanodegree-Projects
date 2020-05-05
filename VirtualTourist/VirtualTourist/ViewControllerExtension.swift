@@ -26,7 +26,7 @@ extension UIViewController {
         }
     }
     
-    func showActivityLoadingIndicatorView(_ message: String? = "Please wait a moment...") {
+    func showActivityLoadingIndicatorView(_ message: String? = "Please wait a moment...", animated: Bool = true) {
         let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
 
         let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
@@ -36,6 +36,6 @@ extension UIViewController {
 
         alert.view.addSubview(loadingIndicator)
         
-        present(alert, animated: true, completion: nil)
+        present(alert, animated: animated, completion: nil)
     }
 }

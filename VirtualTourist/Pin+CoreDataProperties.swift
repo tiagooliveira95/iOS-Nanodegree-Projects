@@ -22,6 +22,7 @@ extension Pin {
     @NSManaged public var lng: Double
     @NSManaged public var lastPageSaved: Int16
     @NSManaged public var photos: NSSet?
+    @NSManaged public var maxPages: Int16
 
 }
 

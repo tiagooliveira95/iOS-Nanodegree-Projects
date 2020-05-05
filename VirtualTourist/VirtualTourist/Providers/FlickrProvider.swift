@@ -93,7 +93,6 @@ class FlickrProvider{
         photoUrl.host = "farm\(photo.farm).staticflickr.com"
         photoUrl.path = "/\(photo.server)/\(photo.id)_\(photo.secret)_s.jpg"
         let url: URL? = photoUrl.url
-        print("Phoyo URL: \(url?.absoluteString ?? "nil") ") // Debug
         return url!
     }
     
