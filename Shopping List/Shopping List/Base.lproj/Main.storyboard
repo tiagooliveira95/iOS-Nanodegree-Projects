@@ -26,18 +26,72 @@
         <!--Register-->
         <scene sceneID="a9r-9K-Ldq">
             <objects>
-                <viewController id="TKc-2B-z1v" sceneMemberID="viewController">
+                <viewController id="TKc-2B-z1v" customClass="RegisterViewController" customModule="Shopping_List" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="DZN-qT-8Hm">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="e-mail" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OaE-5h-4ef">
+                                <rect key="frame" x="20" y="152" width="374" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eSq-hb-sDS">
+                                <rect key="frame" x="20" y="194" width="374" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="First name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gFY-to-1AB">
+                                <rect key="frame" x="20" y="236" width="374" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Last name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7bU-kf-7KT">
+                                <rect key="frame" x="20" y="278" width="374" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dVi-iF-Uq4">
+                                <rect key="frame" x="20" y="328" width="374" height="30"/>
+                                <state key="normal" title="Create account"/>
+                                <connections>
+                                    <action selector="onCreateAccountButtonClicked:" destination="TKc-2B-z1v" eventType="touchUpInside" id="3P1-N1-sua"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="dVi-iF-Uq4" firstAttribute="top" secondItem="7bU-kf-7KT" secondAttribute="bottom" constant="16" id="4JC-YZ-sj5"/>
+                            <constraint firstItem="dVi-iF-Uq4" firstAttribute="leading" secondItem="AJA-mK-JXj" secondAttribute="leading" constant="20" id="5A1-bX-JTi"/>
+                            <constraint firstItem="AJA-mK-JXj" firstAttribute="trailing" secondItem="gFY-to-1AB" secondAttribute="trailing" constant="20" id="6k5-R6-jRp"/>
+                            <constraint firstItem="7bU-kf-7KT" firstAttribute="top" secondItem="gFY-to-1AB" secondAttribute="bottom" constant="8" id="MRC-du-Ukd"/>
+                            <constraint firstItem="gFY-to-1AB" firstAttribute="leading" secondItem="AJA-mK-JXj" secondAttribute="leading" constant="20" id="Pba-tE-wYK"/>
+                            <constraint firstItem="eSq-hb-sDS" firstAttribute="leading" secondItem="AJA-mK-JXj" secondAttribute="leading" constant="20" id="SVM-BK-iY6"/>
+                            <constraint firstItem="AJA-mK-JXj" firstAttribute="trailing" secondItem="eSq-hb-sDS" secondAttribute="trailing" constant="20" id="Wsq-un-r0W"/>
+                            <constraint firstItem="OaE-5h-4ef" firstAttribute="leading" secondItem="AJA-mK-JXj" secondAttribute="leading" constant="20" id="Yfc-Tp-wmS"/>
+                            <constraint firstItem="AJA-mK-JXj" firstAttribute="trailing" secondItem="OaE-5h-4ef" secondAttribute="trailing" constant="20" id="bdP-8g-EaR"/>
+                            <constraint firstItem="gFY-to-1AB" firstAttribute="top" secondItem="eSq-hb-sDS" secondAttribute="bottom" constant="8" id="kXe-qK-LET"/>
+                            <constraint firstItem="eSq-hb-sDS" firstAttribute="top" secondItem="OaE-5h-4ef" secondAttribute="bottom" constant="8" id="pfB-Ki-q7Z"/>
+                            <constraint firstItem="AJA-mK-JXj" firstAttribute="trailing" secondItem="7bU-kf-7KT" secondAttribute="trailing" constant="20" id="qBR-zk-qhd"/>
+                            <constraint firstItem="AJA-mK-JXj" firstAttribute="trailing" secondItem="dVi-iF-Uq4" secondAttribute="trailing" constant="20" id="tov-FC-nee"/>
+                            <constraint firstItem="OaE-5h-4ef" firstAttribute="top" secondItem="AJA-mK-JXj" secondAttribute="top" constant="64" id="unq-kF-4Ze"/>
+                            <constraint firstItem="7bU-kf-7KT" firstAttribute="leading" secondItem="AJA-mK-JXj" secondAttribute="leading" constant="20" id="xnG-9B-7KK"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="AJA-mK-JXj"/>
                     </view>
                     <navigationItem key="navigationItem" title="Register" id="s1T-np-n9a"/>
+                    <connections>
+                        <outlet property="createAccountButoon" destination="dVi-iF-Uq4" id="kvf-cm-QB4"/>
+                        <outlet property="emailField" destination="OaE-5h-4ef" id="oMj-Lj-rIA"/>
+                        <outlet property="firstNameField" destination="gFY-to-1AB" id="Jz6-Pi-Aea"/>
+                        <outlet property="lastNAmeField" destination="7bU-kf-7KT" id="pX8-SH-4cA"/>
+                        <outlet property="lastNameField" destination="7bU-kf-7KT" id="OFn-w3-Aw0"/>
+                        <outlet property="passwordField" destination="eSq-hb-sDS" id="Meg-nR-rib"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="obn-fU-uzT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="370" y="830"/>
+            <point key="canvasLocation" x="369.56521739130437" y="829.6875"/>
         </scene>
         <!--Settings-->
         <scene sceneID="k7E-Ij-U5h">
@@ -58,7 +112,7 @@
         <!--Login-->
         <scene sceneID="0lY-dt-6VI">
             <objects>
-                <viewController id="YQs-x3-dbC" sceneMemberID="viewController">
+                <viewController id="YQs-x3-dbC" customClass="LoginViewController" customModule="Shopping_List" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="fcL-f4-I2L">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -82,6 +136,9 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L0X-rY-jgf">
                                 <rect key="frame" x="0.0" y="343" width="414" height="30"/>
                                 <state key="normal" title="Login"/>
+                                <connections>
+                                    <action selector="onLoginButtonClicked:" destination="YQs-x3-dbC" eventType="touchUpInside" id="ZO3-vY-TBR"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OFT-tQ-cwi">
                                 <rect key="frame" x="68" y="832" width="279" height="30"/>
@@ -113,6 +170,10 @@
                     </view>
                     <navigationItem key="navigationItem" title="Login" id="0KJ-YJ-2RZ"/>
                     <connections>
+                        <outlet property="emailField" destination="ocl-kx-hBF" id="cda-6c-IL7"/>
+                        <outlet property="loginButton" destination="L0X-rY-jgf" id="ZBM-Jm-Zes"/>
+                        <outlet property="onLoginButtonClicked" destination="L0X-rY-jgf" id="esi-jv-ofP"/>
+                        <outlet property="passwordField" destination="f8W-pq-XQF" id="ZiN-Wg-bOU"/>
                         <segue destination="rdu-Y3-eu1" kind="show" id="OHE-9x-3ef"/>
                     </connections>
                 </viewController>
