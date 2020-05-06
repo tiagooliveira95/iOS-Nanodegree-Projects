@@ -15,7 +15,7 @@
 		E8D6896D246228D9000A27A2 /* ShoppingListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8D6896C246228D9000A27A2 /* ShoppingListViewController.swift */; };
 		E8D6896F24622967000A27A2 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8D6896E24622967000A27A2 /* SettingsViewController.swift */; };
 		E8D68971246229AF000A27A2 /* SetFamilyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8D68970246229AF000A27A2 /* SetFamilyViewController.swift */; };
-		E8D6897324622A15000A27A2 /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8D6897224622A15000A27A2 /* DetailsViewController.swift */; };
+		E8D68975246359C7000A27A2 /* AddNewItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8D68974246359C7000A27A2 /* AddNewItemViewController.swift */; };
 		E8DE68412460FD0F00047D12 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8DE68402460FD0F00047D12 /* AppDelegate.swift */; };
 		E8DE68432460FD0F00047D12 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8DE68422460FD0F00047D12 /* SceneDelegate.swift */; };
 		E8DE68452460FD0F00047D12 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8DE68442460FD0F00047D12 /* ViewController.swift */; };
@@ -37,7 +37,7 @@
 		E8D6896C246228D9000A27A2 /* ShoppingListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingListViewController.swift; sourceTree = "<group>"; };
 		E8D6896E24622967000A27A2 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		E8D68970246229AF000A27A2 /* SetFamilyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetFamilyViewController.swift; sourceTree = "<group>"; };
-		E8D6897224622A15000A27A2 /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
+		E8D68974246359C7000A27A2 /* AddNewItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewItemViewController.swift; sourceTree = "<group>"; };
 		E8DE683D2460FD0F00047D12 /* Shopping List.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Shopping List.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E8DE68402460FD0F00047D12 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E8DE68422460FD0F00047D12 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -140,7 +140,7 @@
 				E8D6896C246228D9000A27A2 /* ShoppingListViewController.swift */,
 				E8D6896E24622967000A27A2 /* SettingsViewController.swift */,
 				E8D68970246229AF000A27A2 /* SetFamilyViewController.swift */,
-				E8D6897224622A15000A27A2 /* DetailsViewController.swift */,
+				E8D68974246359C7000A27A2 /* AddNewItemViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -262,6 +262,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E8DE68452460FD0F00047D12 /* ViewController.swift in Sources */,
+				E8D68975246359C7000A27A2 /* AddNewItemViewController.swift in Sources */,
 				E8D6896B2461DD4B000A27A2 /* SeguesConstants.swift in Sources */,
 				E8DE684B2460FD0F00047D12 /* Shopping_List.xcdatamodeld in Sources */,
 				E8D6896F24622967000A27A2 /* SettingsViewController.swift in Sources */,
@@ -272,7 +273,6 @@
 				E8D689652461C456000A27A2 /* RegisterViewController.swift in Sources */,
 				E8DE685924611A2300047D12 /* LoginViewController.swift in Sources */,
 				E8DE68432460FD0F00047D12 /* SceneDelegate.swift in Sources */,
-				E8D6897324622A15000A27A2 /* DetailsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

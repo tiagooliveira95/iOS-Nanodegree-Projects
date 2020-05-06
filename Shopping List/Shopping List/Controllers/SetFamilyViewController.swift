@@ -7,18 +7,77 @@
 //
 
 import UIKit
+import Firebase
+import CoreData
 
 class SetFamilyViewController: UIViewController{
     
-    @IBOutlet weak var familyNameField: UITextField!
+    let coreData = (UIApplication.shared.delegate as! AppDelegate)
+    var ref: DatabaseReference!
+    @IBOutlet weak var familyTextField: UITextField!
     
     
-    
+    override func viewWillAppear(_ animated: Bool) {
+        ref = Database.database().reference()
+    }
     
     @IBAction func joinFamilyButtonClicked(_ sender: Any) {
+        //TODO check for errors!
+        //TODO move to constants!
+        
+        ref.child("family").child(familyTextField.text!).observeSingleEvent(of: .value, with: { (snapshot) in
+            // Get value
+            if snapshot.exists() {
+                let userFetch:NSFetchRequest = User.fetchRequest()
+                let user = try! self.coreData.persistentContainer.viewContext.fetch(userFetch).first
+                user?.family = self.familyTextField.text!
+                
+                self.ref.child("family/\(self.familyTextField.text!)/members/")
+                    .setValue([Auth.auth().currentUser!.uid: "\(user!.firstName!) \(user!.lastName!)"])
+               
+                self.coreData.saveContext()
+            } else {
+                print("family not found")
+            }
+            
+          }) { (error) in
+            print("error: \(error.localizedDescription)")
+            //tell user that family was not found!
+        }
     }
     
     @IBAction func createFamilyButtonClicked(_ sender: Any) {
+        ref.child("family").child(familyTextField.text!).observeSingleEvent(of: .value, with: { (snapshot) in
+            //tell user that family already exists!
+            if snapshot.exists() {
+                //join family
+                print("tell user that family ID already exixts.")
+            } else {
+                let userFetch:NSFetchRequest = User.fetchRequest()
+                let user = try! self.coreData.persistentContainer.viewContext.fetch(userFetch).first
+                
+                print("creating family")
+                
+                self.ref.child("family/\(self.familyTextField.text!)/members/").setValue(
+                    [Auth.auth().currentUser!.uid: "\(user!.firstName!) \(user!.lastName!)"]
+                )
+                
+                user!.family = self.familyTextField.text!
+                self.coreData.saveContext()
+            }
+          }) { (error) in
+            print("error: \(error.localizedDescription)")
+        }
     }
     
+    func generateUID()->String{
+        var uid = ""
+        let chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
+        let maxRandom = chars.count
+        
+        for _ in 0...20 {
+            uid += String(chars[chars.index(chars.startIndex, offsetBy: Int.random(in: 0...maxRandom))])
+        }
+        return uid
+    }
 }
