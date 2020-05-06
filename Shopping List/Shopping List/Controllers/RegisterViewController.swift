@@ -13,6 +13,9 @@ import CodableFirebase
 
 class RegisterViewController: UIViewController {
     
+    let coreData = (UIApplication.shared.delegate as! AppDelegate)
+
+    
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
     @IBOutlet weak var firstNameField: UITextField!
@@ -38,6 +41,11 @@ class RegisterViewController: UIViewController {
                             print("Error writing document: \(err)")
                         } else {
                             print("Document successfully written!")
+                            let user = User(context: self.coreData.persistentContainer.viewContext)
+                            user.email = self.emailField.text!
+                            user.firstName = userData.firstName
+                            user.lastName = userData.lastName
+                            self.coreData.saveContext()
                             self.performSegue(withIdentifier: SeguesConstants.LoginToShoppingListSegue, sender: nil)
                         }
                 }

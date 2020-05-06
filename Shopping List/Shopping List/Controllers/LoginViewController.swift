@@ -17,6 +17,8 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var loginButton: UIButton!
     
     var authHandle: AuthStateDidChangeListenerHandle!
+    let coreData = (UIApplication.shared.delegate as! AppDelegate)
+
     
     override func viewWillAppear(_ animated: Bool) {
         authHandle = Auth.auth().addStateDidChangeListener { (auth, user) in
@@ -45,7 +47,7 @@ class LoginViewController: UIViewController {
     
     func showMessagePrompt(error: String){
         //TODO
-        print(error)
+        print("error: \(error)")
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
