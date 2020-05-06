@@ -17,7 +17,8 @@ class ShoppingListViewController: UIViewController{
     @IBOutlet weak var newListButton: UIBarButtonItem!
     @IBOutlet weak var addFamilyButton: UIButton!
     @IBOutlet weak var signoutButton: UIBarButtonItem!
-
+    @IBOutlet weak var shoppingListTable: UITableView!
+    
     override func viewWillAppear(_ animated: Bool) {
         let userFetch:NSFetchRequest = User.fetchRequest()
         let user = try! coreData.persistentContainer.viewContext.fetch(userFetch).first
@@ -26,6 +27,9 @@ class ShoppingListViewController: UIViewController{
         if user?.family == nil {
             self.newListButton.isEnabled = false
             self.settingsButton.isEnabled = false
+            self.shoppingListTable.isHidden = true
+        }else{
+            self.addFamilyButton.isHidden = true
         }
         
     }
