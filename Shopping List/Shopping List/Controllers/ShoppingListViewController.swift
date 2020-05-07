@@ -8,10 +8,13 @@
 
 import UIKit
 import CoreData
+import Firebase
 
 class ShoppingListViewController: UIViewController{
     
     let coreData = (UIApplication.shared.delegate as! AppDelegate)
+    var ref: DatabaseReference!
+    var dbFamilyRef: DatabaseReference!
 
     @IBOutlet weak var settingsButton: UIBarButtonItem!
     @IBOutlet weak var newListButton: UIBarButtonItem!
@@ -32,10 +35,24 @@ class ShoppingListViewController: UIViewController{
             self.addFamilyButton.isHidden = true
         }
         
+        ref = Database.database().reference()
+        dbFamilyRef = ref.child("family/\(user!.family!)/items")
+        
+        dbFamilyRef.observe(DataEventType.value, with: { (snapshot) in
+            let postDict = snapshot.value as? [String : AnyObject] ?? [:]
+            self.populateList(postDict: postDict)
+        })
+    }
+    
+    func populateList(postDict:[String : AnyObject]){
+        
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        dbFamilyRef.removeAllObservers()
     }
 
     @IBAction func addFamilyButtonClicked(_ sender: Any) {
-        print("clicked")
         self.performSegue(withIdentifier: SeguesConstants.ShoppingListToAddFamilySegue, sender: nil)
     }
 }
