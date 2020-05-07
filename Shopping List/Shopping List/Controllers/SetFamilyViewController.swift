@@ -69,15 +69,4 @@ class SetFamilyViewController: UIViewController{
             print("error: \(error.localizedDescription)")
         }
     }
-    
-    func generateUID()->String{
-        var uid = ""
-        let chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
-        let maxRandom = chars.count
-        
-        for _ in 0...20 {
-            uid += String(chars[chars.index(chars.startIndex, offsetBy: Int.random(in: 0...maxRandom))])
-        }
-        return uid
-    }
 }
