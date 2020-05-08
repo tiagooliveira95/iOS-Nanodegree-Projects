@@ -29,7 +29,7 @@ class AddNewItemViewController: UIViewController{
         self.ref.child("family/\(user!.family!)/items/").child(generateItemUID()).setValue(
                 [
                     "name" : itemTextField.text!,
-                    "amount": Int(amountTextField.text!) ?? 0
+                    "amount": amountTextField.text!
                 ]
         ) { (error, ref) -> Void in
             guard error != nil else{
@@ -46,7 +46,7 @@ class AddNewItemViewController: UIViewController{
         let maxRandom = chars.count
         
         for _ in 0...20 {
-            uid += String(chars[chars.index(chars.startIndex, offsetBy: Int.random(in: 0...maxRandom))])
+            uid += String(chars[chars.index(chars.startIndex, offsetBy: Int.random(in: 0...maxRandom-1))])
         }
         return uid
     }

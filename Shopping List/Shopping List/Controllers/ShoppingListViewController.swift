@@ -15,8 +15,10 @@ class ShoppingListViewController: UIViewController, UITableViewDataSource, UITab
     let coreData = (UIApplication.shared.delegate as! AppDelegate)
     var ref: DatabaseReference!
     var dbFamilyRef: DatabaseReference!
-    
     var shippingItems: [ShoppingItem] = []
+    
+    // use to avoid executing the firebase observer when making changes to it
+    var buzy = false
 
     @IBOutlet weak var settingsButton: UIBarButtonItem!
     @IBOutlet weak var newListButton: UIBarButtonItem!
@@ -31,10 +33,6 @@ class ShoppingListViewController: UIViewController, UITableViewDataSource, UITab
         shoppingListTable.dataSource = self
         shoppingListTable.delegate = self
         
-        let itemsFetch:NSFetchRequest = ShoppingItem.fetchRequest()
-        shippingItems = try! coreData.persistentContainer.viewContext.fetch(itemsFetch)
-        self.shoppingListTable.reloadData()
-        
         //disable buttons if family is not found
         if user?.family == nil {
             self.newListButton.isEnabled = false
@@ -44,49 +42,31 @@ class ShoppingListViewController: UIViewController, UITableViewDataSource, UITab
         }
         
         self.addFamilyButton.isHidden = true
-        ref = Database.database().reference()
-        dbFamilyRef = ref.child("family/\(user!.family!)/items")
         
+        let db = Database.database()
+        ref = db.reference()
+        
+        dbFamilyRef = ref.child("family/\(user!.family!)/items")
+        dbFamilyRef.keepSynced(true)
+      
         dbFamilyRef.observe(DataEventType.value, with: { (snapshot) in
-            let postDict = snapshot.value as? [String : AnyObject] ?? [:]
+            guard !self.buzy else{ return }
+            
+            let postDict = snapshot.value as? [String : [String : Any]] ?? [:]
+            print(postDict.count)
             self.populateList(postDict: postDict)
         })
-        
-        
     }
     
-    func populateList(postDict:[String : AnyObject]){
-        
+    func populateList(postDict:[String : [String : Any]]){
+        shippingItems = []
         for (key, value) in postDict {
-            let item = value as! [String : String]
-            print("key: \(key) value name: \(item["name"]!), \(item["amount"]!)")
-            
-            //⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️\\
-            //⚠️ WARNING: CRINGEY CODE AHEAD ⚠️\\
-            //🤮 WARNING: CRINGEY CODE AHEAD 🤮\\
-            //⚠️ WARNING: CRINGEY CODE AHEAD ⚠️\\
-            
-           
-            var exists = false
-            for coreDataItem in self.shippingItems {
-                if coreDataItem.uid == key {
-                    exists = true
-                    break
-                }
-            }
-        
-            //⚠️                            ⚠️\\
-            //⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️ \\
-            
-            if !exists {
-                let shopItem: ShoppingItem = ShoppingItem(context: self.coreData.persistentContainer.viewContext)
-                shopItem.uid = key
-                shopItem.name = item["name"]!
-                shopItem.quantity = item["amount"]!
-            
-                self.shippingItems.append(shopItem)
-                self.coreData.saveContext()
-            }
+            let shopItem: ShoppingItem = ShoppingItem()
+            shopItem.uid = key
+            shopItem.name = value["name"]! as? String
+            shopItem.quantity = value["amount"]! as? String
+            print("\(shopItem.name) \(shopItem.quantity)")
+            self.shippingItems.append(shopItem)
         }
         self.shoppingListTable.reloadData()
     }
@@ -98,7 +78,6 @@ class ShoppingListViewController: UIViewController, UITableViewDataSource, UITab
     @IBAction func addFamilyButtonClicked(_ sender: Any) {
         self.performSegue(withIdentifier: SeguesConstants.ShoppingListToAddFamilySegue, sender: nil)
     }
-    
     
     private func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return 50
@@ -112,5 +91,27 @@ class ShoppingListViewController: UIViewController, UITableViewDataSource, UITab
         let cell = shoppingListTable.dequeueReusableCell(withIdentifier: Identifiers.ShoppingTableCellIdentifier, for: indexPath) as! ShoppingItemViewCell
         cell.setData(item: self.shippingItems[indexPath.row])
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if (editingStyle == .delete) {
+            // handle delete (by removing the data from your array and updating the tableview)
+            buzy = true
+            dbFamilyRef.child(shippingItems[indexPath.row].uid).removeValue {
+                (error,ref) in
+                if error == nil {
+                    self.shippingItems.remove(at: indexPath.row)
+                    self.shoppingListTable.deleteRows(at: [indexPath], with: .automatic)
+                }else {
+                    //show error to user
+                    print("failed to delete")
+                }
+                self.buzy = false
+            }
+        }
     }
 }
