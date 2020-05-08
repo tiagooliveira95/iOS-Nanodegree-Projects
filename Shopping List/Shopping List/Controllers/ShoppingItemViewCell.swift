@@ -20,8 +20,8 @@ class ShoppingItemViewCell: UITableViewCell{
     }
     
     func setData(item: ShoppingItem){
-        self.itemLabel.text = item.name
-        self.amountLabel.text = String(item.quantity)
+        self.itemLabel.text = item.name! as String
+        self.amountLabel.text = item.quantity! as String
     }
 
     

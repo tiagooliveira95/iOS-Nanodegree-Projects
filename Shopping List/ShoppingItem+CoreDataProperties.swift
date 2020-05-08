@@ -15,8 +15,9 @@ extension ShoppingItem {
     @nonobjc public class func fetchRequest() -> NSFetchRequest<ShoppingItem> {
         return NSFetchRequest<ShoppingItem>(entityName: "ShoppingItem")
     }
-
-    @NSManaged public var name: String?
-    @NSManaged public var quantity: Int16
+    
+    @NSManaged public var uid: String
+    @NSManaged public var name: String
+    @NSManaged public var quantity: String
 
 }

@@ -17,6 +17,7 @@
 		E8D68971246229AF000A27A2 /* SetFamilyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8D68970246229AF000A27A2 /* SetFamilyViewController.swift */; };
 		E8D68975246359C7000A27A2 /* AddNewItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8D68974246359C7000A27A2 /* AddNewItemViewController.swift */; };
 		E8D6897A24638C32000A27A2 /* ShoppingItemViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8D6897924638C32000A27A2 /* ShoppingItemViewCell.swift */; };
+		E8D6897C2464E8DE000A27A2 /* Identifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8D6897B2464E8DE000A27A2 /* Identifiers.swift */; };
 		E8DE68412460FD0F00047D12 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8DE68402460FD0F00047D12 /* AppDelegate.swift */; };
 		E8DE68432460FD0F00047D12 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8DE68422460FD0F00047D12 /* SceneDelegate.swift */; };
 		E8DE68452460FD0F00047D12 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8DE68442460FD0F00047D12 /* ViewController.swift */; };
@@ -40,6 +41,7 @@
 		E8D68970246229AF000A27A2 /* SetFamilyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetFamilyViewController.swift; sourceTree = "<group>"; };
 		E8D68974246359C7000A27A2 /* AddNewItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewItemViewController.swift; sourceTree = "<group>"; };
 		E8D6897924638C32000A27A2 /* ShoppingItemViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingItemViewCell.swift; sourceTree = "<group>"; };
+		E8D6897B2464E8DE000A27A2 /* Identifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Identifiers.swift; sourceTree = "<group>"; };
 		E8DE683D2460FD0F00047D12 /* Shopping List.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Shopping List.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E8DE68402460FD0F00047D12 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E8DE68422460FD0F00047D12 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -93,6 +95,7 @@
 			isa = PBXGroup;
 			children = (
 				E8D6896A2461DD4B000A27A2 /* SeguesConstants.swift */,
+				E8D6897B2464E8DE000A27A2 /* Identifiers.swift */,
 			);
 			path = Constants;
 			sourceTree = "<group>";
@@ -268,6 +271,7 @@
 				E8D68975246359C7000A27A2 /* AddNewItemViewController.swift in Sources */,
 				E8D6897A24638C32000A27A2 /* ShoppingItemViewCell.swift in Sources */,
 				E8D6896B2461DD4B000A27A2 /* SeguesConstants.swift in Sources */,
+				E8D6897C2464E8DE000A27A2 /* Identifiers.swift in Sources */,
 				E8DE684B2460FD0F00047D12 /* Shopping_List.xcdatamodeld in Sources */,
 				E8D6896F24622967000A27A2 /* SettingsViewController.swift in Sources */,
 				E8D689682461CE71000A27A2 /* UserData.swift in Sources */,
