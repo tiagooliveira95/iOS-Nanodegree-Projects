@@ -8,7 +8,8 @@
 
 import UIKit
 import Firebase
-
+import CoreData
+import FirebaseFirestoreSwift
 
 class LoginViewController: UIViewController {
     
@@ -22,7 +23,14 @@ class LoginViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         authHandle = Auth.auth().addStateDidChangeListener { (auth, user) in
-            if user != nil {
+            if user != nil && !user!.isAnonymous {
+                let userFetch:NSFetchRequest = User.fetchRequest()
+                let userCD = try! self.coreData.persistentContainer.viewContext.fetch(userFetch).first
+                
+                if userCD == nil{
+                    print("User not found on CoreData getting data from Firebase")
+                    self.retriveAndSaveUserData()
+                }
                 print("user is logged in")
                 self.performSegue(withIdentifier: SeguesConstants.LoginToShoppingListSegue, sender: nil)
             }
@@ -52,5 +60,21 @@ class LoginViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         //TODO
+    }
+    
+    func retriveAndSaveUserData(){
+        Firestore.firestore().collection("users").document(Auth.auth().currentUser!.uid).getDocument{ (document,error) in
+            if let document = document {
+                let dataDescription = document.data() as! [String: String]
+                
+                let user = User(context: self.coreData.persistentContainer.viewContext)
+                user.email = self.emailField.text!
+                user.firstName = dataDescription["firstName"]
+                user.lastName = dataDescription["lastName"]
+                self.coreData.saveContext()
+            } else {
+              print("Document does not exist in cache")
+            }
+        }
     }
 }
