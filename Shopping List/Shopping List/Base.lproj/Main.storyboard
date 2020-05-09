@@ -128,6 +128,9 @@
                         <viewLayoutGuide key="safeArea" id="zhh-7b-Mrz"/>
                     </view>
                     <navigationItem key="navigationItem" title="Settings" id="dqL-VS-gz6"/>
+                    <connections>
+                        <outlet property="familyLabel" destination="zpQ-Kf-blA" id="foZ-GN-drc"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jyP-90-nkx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -205,6 +208,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CmL-qP-k9V" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="avc-D0-F4j" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="369.56521739130437" y="131.91964285714286"/>
         </scene>
@@ -216,6 +220,16 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cfV-E6-0Pd">
+                                <rect key="frame" x="0.0" y="764" width="414" height="49"/>
+                                <items>
+                                    <barButtonItem image="pencil" catalog="system" id="p7F-wq-RbO">
+                                        <connections>
+                                            <segue destination="fWm-9a-hxw" kind="presentation" id="XHb-L2-dpg"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Bos-GS-omA">
                                 <rect key="frame" x="0.0" y="88" width="414" height="676"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -259,7 +273,7 @@
                                 </prototypes>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a5o-yv-ehr">
-                                <rect key="frame" x="0.0" y="433" width="414" height="30"/>
+                                <rect key="frame" x="16" y="88" width="382" height="725"/>
                                 <state key="normal" title="Add or create a family">
                                     <color key="titleColor" red="0.062810324129999998" green="0.6984155178" blue="0.89414423700000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </state>
@@ -267,36 +281,30 @@
                                     <action selector="addFamilyButtonClicked:" destination="rdu-Y3-eu1" eventType="touchUpInside" id="hzf-6W-waI"/>
                                 </connections>
                             </button>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cfV-E6-0Pd">
-                                <rect key="frame" x="0.0" y="764" width="414" height="49"/>
-                                <items>
-                                    <barButtonItem image="pencil" catalog="system" id="p7F-wq-RbO">
-                                        <connections>
-                                            <segue destination="fWm-9a-hxw" kind="presentation" id="XHb-L2-dpg"/>
-                                        </connections>
-                                    </barButtonItem>
-                                </items>
-                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="a5o-yv-ehr" firstAttribute="leading" secondItem="hj1-Jc-7r0" secondAttribute="leading" id="2uM-CE-Wt9"/>
-                            <constraint firstItem="a5o-yv-ehr" firstAttribute="top" secondItem="hj1-Jc-7r0" secondAttribute="top" constant="345" id="35F-pY-P5Z"/>
-                            <constraint firstItem="hj1-Jc-7r0" firstAttribute="trailing" secondItem="a5o-yv-ehr" secondAttribute="trailing" id="4Qc-28-ySf"/>
+                            <constraint firstItem="a5o-yv-ehr" firstAttribute="leading" secondItem="hj1-Jc-7r0" secondAttribute="leading" constant="16" id="2uM-CE-Wt9"/>
+                            <constraint firstItem="a5o-yv-ehr" firstAttribute="top" secondItem="hj1-Jc-7r0" secondAttribute="top" id="35F-pY-P5Z"/>
+                            <constraint firstItem="hj1-Jc-7r0" firstAttribute="trailing" secondItem="a5o-yv-ehr" secondAttribute="trailing" constant="16" id="4Qc-28-ySf"/>
                             <constraint firstItem="Bos-GS-omA" firstAttribute="leading" secondItem="hj1-Jc-7r0" secondAttribute="leading" id="KOz-dR-Ata"/>
                             <constraint firstItem="cfV-E6-0Pd" firstAttribute="top" secondItem="Bos-GS-omA" secondAttribute="bottom" id="KwG-VB-PfC"/>
                             <constraint firstItem="hj1-Jc-7r0" firstAttribute="trailing" secondItem="Bos-GS-omA" secondAttribute="trailing" id="S3R-SB-5GB"/>
                             <constraint firstItem="hj1-Jc-7r0" firstAttribute="trailing" secondItem="cfV-E6-0Pd" secondAttribute="trailing" id="Tc5-jk-KZm"/>
                             <constraint firstItem="Bos-GS-omA" firstAttribute="top" secondItem="hj1-Jc-7r0" secondAttribute="top" id="U1m-X8-uMV"/>
                             <constraint firstItem="cfV-E6-0Pd" firstAttribute="leading" secondItem="hj1-Jc-7r0" secondAttribute="leading" id="bFM-5v-WS4"/>
-                            <constraint firstItem="hj1-Jc-7r0" firstAttribute="bottom" secondItem="a5o-yv-ehr" secondAttribute="bottom" constant="350" id="bl8-el-M35"/>
+                            <constraint firstItem="hj1-Jc-7r0" firstAttribute="bottom" secondItem="a5o-yv-ehr" secondAttribute="bottom" id="bl8-el-M35"/>
                             <constraint firstItem="hj1-Jc-7r0" firstAttribute="bottom" secondItem="cfV-E6-0Pd" secondAttribute="bottom" id="fEA-rK-26p"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="hj1-Jc-7r0"/>
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="gwa-pu-TIG">
-                        <barButtonItem key="leftBarButtonItem" title="Sign out" id="TLb-RQ-6Qc"/>
+                        <barButtonItem key="leftBarButtonItem" title="Sign out" id="TLb-RQ-6Qc">
+                            <connections>
+                                <action selector="onSignOutButtonPressed:" destination="rdu-Y3-eu1" id="aji-LC-jLd"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="gear" catalog="system" id="yhS-5m-woT">
                             <connections>
                                 <segue destination="j2p-Hc-nWK" kind="show" id="UAL-Aj-g1j"/>
@@ -311,6 +319,7 @@
                         <outlet property="shoppingListTable" destination="Bos-GS-omA" id="gVP-Dg-J9d"/>
                         <outlet property="signoutButton" destination="TLb-RQ-6Qc" id="kqd-Se-fKZ"/>
                         <segue destination="Fpt-r0-Zha" kind="presentation" identifier="ShoppingListToAddFamilySegue" id="AfS-aj-8na"/>
+                        <segue destination="avc-D0-F4j" kind="unwind" identifier="UnwindBackToLoginSegue" unwindAction="myUnwindActionWithUnwindSegue:" id="JU8-az-pKf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="799-ww-afc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

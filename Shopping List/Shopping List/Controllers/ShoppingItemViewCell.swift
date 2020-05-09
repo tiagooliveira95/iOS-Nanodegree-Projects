@@ -9,7 +9,7 @@
 import UIKit
 
 
-class ShoppingItemViewCell: UITableViewCell{
+class ShoppingItemViewCell: UITableViewCell {
     
     @IBOutlet weak var itemLabel: UILabel!
     @IBOutlet weak var amountLabel: UILabel!
@@ -23,7 +23,4 @@ class ShoppingItemViewCell: UITableViewCell{
         self.itemLabel.text = item.name! as String
         self.amountLabel.text = item.quantity! as String
     }
-
-    
-    
 }

@@ -24,21 +24,29 @@ class RegisterViewController: UIViewController {
         
     
     @IBAction func onCreateAccountButtonClicked(_ sender: Any) {
-        //TODO CHECK DATA FIRST!
+        guard let email = self.emailField?.text, let password = self.passwordField?.text,
+            !email.isEmpty && !password.isEmpty && email.contains("@") else {
+                self.showUIAlert(title: "Input Error", message: "E-mail or password are invalid.", style: .alert, actions: [], viewController: nil)
+                return
+        }
         
+        guard password.count >= AuthConstants.MIN_PASSWORD_LENGTH else {
+            self.showUIAlert(title: "Input Error", message: "Password must have at least 8 characters.", style: .alert, actions: [], viewController: nil)
+            return
+        }
+        
+        self.showActivityLoadingIndicatorView("Creating account...")
         Auth.auth().createUser(withEmail: emailField.text!, password: passwordField.text!) { authResult, error in
-            //TODO check for errors!
-            
-            //TODO save first/last name to db
             let userData = UserData()
             userData.firstName = self.firstNameField.text!
             userData.lastName = self.lastNameField.text!
-            
+
             do{
                 try Firestore.firestore().collection("users").document(Auth.auth().currentUser!.uid)
                     .setData(from: userData) { err in
                         if let err = err {
                             print("Error writing document: \(err)")
+                            self.showUIAlert(title: "Error", message: err.localizedDescription, style: .alert, actions: [], viewController: nil)
                         } else {
                             print("Document successfully written!")
                             let user = User(context: self.coreData.persistentContainer.viewContext)
@@ -46,11 +54,13 @@ class RegisterViewController: UIViewController {
                             user.firstName = userData.firstName
                             user.lastName = userData.lastName
                             self.coreData.saveContext()
+                            self.dismiss(animated: false)
                             self.performSegue(withIdentifier: SeguesConstants.LoginToShoppingListSegue, sender: nil)
                         }
                 }
             } catch {
-                print("Error info: \(error)")
+                self.dismiss(animated: true)
+                self.showUIAlert(title: "Error", message: error.localizedDescription, style: .alert, actions: [], viewController: nil)
             }
         }
     }

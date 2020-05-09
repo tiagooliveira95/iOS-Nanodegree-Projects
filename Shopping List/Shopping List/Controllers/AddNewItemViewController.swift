@@ -32,15 +32,16 @@ class AddNewItemViewController: UIViewController{
                     "amount": amountTextField.text!
                 ]
         ) { (error, ref) -> Void in
-            guard error != nil else{
+            guard error == nil else{
                 //todo show error0
+                self.dismiss(animated: true)
                 return
             }
             self.dismiss(animated: true)
         }
     }
     
-    func generateItemUID()->String{
+    func generateItemUID() -> String {
         var uid = ""
         let chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
         let maxRandom = chars.count
@@ -50,5 +51,4 @@ class AddNewItemViewController: UIViewController{
         }
         return uid
     }
-    
 }

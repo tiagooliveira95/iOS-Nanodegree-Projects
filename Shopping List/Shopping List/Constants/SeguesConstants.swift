@@ -9,4 +9,5 @@
 class SeguesConstants {
     static let LoginToShoppingListSegue = "LoginToShoppingListSegue"
     static let ShoppingListToAddFamilySegue = "ShoppingListToAddFamilySegue"
+    static let UnwindBackToLoginSegue = "UnwindBackToLoginSegue"
 }

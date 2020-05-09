@@ -36,10 +36,11 @@ class SetFamilyViewController: UIViewController{
                     .setValue([Auth.auth().currentUser!.uid: "\(user!.firstName!) \(user!.lastName!)"])
                
                 self.coreData.saveContext()
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "reload"), object: nil)
+                self.dismiss(animated: true)
             } else {
                 print("family not found")
             }
-            
           }) { (error) in
             print("error: \(error.localizedDescription)")
             //tell user that family was not found!

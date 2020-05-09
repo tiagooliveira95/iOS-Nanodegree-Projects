@@ -16,6 +16,7 @@ class ShoppingListViewController: UIViewController, UITableViewDataSource, UITab
     var ref: DatabaseReference!
     var dbFamilyRef: DatabaseReference!
     var shippingItems: [ShoppingItem] = []
+    var currentUser: User!
     
     // use to avoid executing the firebase observer when making changes to it
     var buzy = false
@@ -28,13 +29,13 @@ class ShoppingListViewController: UIViewController, UITableViewDataSource, UITab
     
     override func viewWillAppear(_ animated: Bool) {
         let userFetch:NSFetchRequest = User.fetchRequest()
-        let user = try! coreData.persistentContainer.viewContext.fetch(userFetch).first
+        currentUser = try! coreData.persistentContainer.viewContext.fetch(userFetch).first
     
         shoppingListTable.dataSource = self
         shoppingListTable.delegate = self
         
         //disable buttons if family is not found
-        if user?.family == nil {
+        if currentUser.family == nil {
             self.newListButton.isEnabled = false
             self.settingsButton.isEnabled = false
             self.shoppingListTable.isHidden = true
@@ -46,9 +47,17 @@ class ShoppingListViewController: UIViewController, UITableViewDataSource, UITab
         let db = Database.database()
         ref = db.reference()
         
-        dbFamilyRef = ref.child("family/\(user!.family!)/items")
+        setFirebaseObserver()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(setFirebaseObserver), name:NSNotification.Name(rawValue: "reload"), object: nil)
+
+    }
+    
+    @objc func setFirebaseObserver(){
+        
+        dbFamilyRef = ref.child("family/\(currentUser.family!)/items")
         dbFamilyRef.keepSynced(true)
-      
+        
         dbFamilyRef.observe(DataEventType.value, with: { (snapshot) in
             guard !self.buzy else{ return }
             
@@ -65,7 +74,6 @@ class ShoppingListViewController: UIViewController, UITableViewDataSource, UITab
             shopItem.uid = key
             shopItem.name = value["name"]! as? String
             shopItem.quantity = value["amount"]! as? String
-            print("\(shopItem.name) \(shopItem.quantity)")
             self.shippingItems.append(shopItem)
         }
         self.shoppingListTable.reloadData()
@@ -112,6 +120,16 @@ class ShoppingListViewController: UIViewController, UITableViewDataSource, UITab
                 }
                 self.buzy = false
             }
+        }
+    }
+    
+    @IBAction func onSignOutButtonPressed(_ sender: Any) {
+        do{
+            self.coreData.persistentContainer.viewContext.delete(self.currentUser)
+            try Auth.auth().signOut()
+            self.performSegue(withIdentifier: SeguesConstants.UnwindBackToLoginSegue, sender: self)
+        }catch{
+            self.showUIAlert(title: "Error", message: "Signout failed", style: .alert, actions: [], viewController: nil)
         }
     }
 }
