@@ -28,11 +28,15 @@ class ShoppingListViewController: UIViewController, UITableViewDataSource, UITab
     @IBOutlet weak var shoppingListTable: UITableView!
     
     override func viewWillAppear(_ animated: Bool) {
-        let userFetch:NSFetchRequest = User.fetchRequest()
-        currentUser = try! coreData.persistentContainer.viewContext.fetch(userFetch).first
+        currentUser = try! coreData.persistentContainer.viewContext.fetch(User.fetchRequest()).first
     
         shoppingListTable.dataSource = self
         shoppingListTable.delegate = self
+        
+        let db = Database.database()
+              ref = db.reference()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(setFirebaseObserver(notification:)), name:NSNotification.Name(rawValue: "reload"), object: nil)
         
         //disable buttons if family is not found
         if currentUser.family == nil {
@@ -44,23 +48,19 @@ class ShoppingListViewController: UIViewController, UITableViewDataSource, UITab
         
         self.addFamilyButton.isHidden = true
         
-        let db = Database.database()
-        ref = db.reference()
-        
         setFirebaseObserver()
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(setFirebaseObserver), name:NSNotification.Name(rawValue: "reload"), object: nil)
-
     }
     
-    @objc func setFirebaseObserver(){
+    @objc func setFirebaseObserver(notification: NSNotification? = nil){
+        currentUser = try! coreData.persistentContainer.viewContext.fetch(User.fetchRequest()).first
+
+        let family:String = notification?.userInfo!["family"] as? String ?? currentUser.family!
         
-        dbFamilyRef = ref.child("family/\(currentUser.family!)/items")
+        dbFamilyRef = ref.child("family/\(family)/items")
         dbFamilyRef.keepSynced(true)
         
         dbFamilyRef.observe(DataEventType.value, with: { (snapshot) in
             guard !self.buzy else{ return }
-            
             let postDict = snapshot.value as? [String : [String : Any]] ?? [:]
             print(postDict.count)
             self.populateList(postDict: postDict)
@@ -76,6 +76,13 @@ class ShoppingListViewController: UIViewController, UITableViewDataSource, UITab
             shopItem.quantity = value["amount"]! as? String
             self.shippingItems.append(shopItem)
         }
+       
+        self.addFamilyButton.isHidden = true
+        self.newListButton.isEnabled = true
+        self.settingsButton.isEnabled = true
+        self.shoppingListTable.isHidden = false
+
+
         self.shoppingListTable.reloadData()
     }
     
