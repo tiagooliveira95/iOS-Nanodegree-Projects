@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import CoreData
+import FirebaseFirestoreSwift
 
 class SetFamilyViewController: UIViewController{
     
@@ -22,31 +23,33 @@ class SetFamilyViewController: UIViewController{
     }
     
     @IBAction func joinFamilyButtonClicked(_ sender: Any) {
-        //TODO check for errors!
-        //TODO move to constants!
-        
         ref.child("family").child(familyTextField.text!).observeSingleEvent(of: .value, with: { (snapshot) in
             // Get value
             if snapshot.exists() {
-                let userFetch:NSFetchRequest = User.fetchRequest()
-                let user = try! self.coreData.persistentContainer.viewContext.fetch(userFetch).first
-                user?.family = self.familyTextField.text!
-                
-                self.ref.child("family/\(self.familyTextField.text!)/members/")
-                    .setValue([Auth.auth().currentUser!.uid: "\(user!.firstName!) \(user!.lastName!)"])
-               
-                self.coreData.saveContext()
-                self.dismiss(animated: true)
-               
-                let data:[String: String] = ["family": self.familyTextField.text!]
-                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "reload"), object: nil, userInfo: data)
+                //save family to Firestore
+                Firestore.firestore().collection(FirebaseConstants.USER_PATH).document(Auth.auth().currentUser!.uid)
+                    .updateData([FirebaseConstants.FAMILY_PATH : self.familyTextField.text!]) { err in
+                        if let err = err {
+                            self.showUIAlert(title: "Error", message: err.localizedDescription, style: .alert, actions:[], viewController: nil)
+                        } else {
+                            //save into core data
+                            let userFetch:NSFetchRequest = User.fetchRequest()
+                            let user = try! self.coreData.persistentContainer.viewContext.fetch(userFetch).first
+                            
+                            self.ref.child("\(FirebaseConstants.FAMILY_PATH)/\(self.familyTextField.text!)/\(MEMBERS_PATH)/").child(Auth.auth().currentUser!.uid)
+                                .setValue(["name": "\(user!.firstName!) \(user!.lastName!)"])
+                    
+                            user?.family = self.familyTextField.text!
+                            self.coreData.saveContext()
+                            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "reload"), object: nil)
+                            self.dismiss(animated: true)
+                    }
+                }
             } else {
-                print("family not found")
-                //TODO
+                self.showUIAlert(title: "Error", message: "Family not found", style: .alert, actions: [], viewController: nil)
             }
           }) { (error) in
-            print("error: \(error.localizedDescription)")
-            //tell user that family was not found!
+            self.showUIAlert(title: "Error", message: error.localizedDescription, style: .alert, actions: [], viewController: nil)
         }
     }
     
@@ -54,17 +57,13 @@ class SetFamilyViewController: UIViewController{
         ref.child("family").child(familyTextField.text!).observeSingleEvent(of: .value, with: { (snapshot) in
             //tell user that family already exists!
             if snapshot.exists() {
-                //join family
-                print("tell user that family ID already exixts.")
+                self.showUIAlert(title: "Error", message: "Family already exists", style: .alert, actions: [], viewController: nil)
             } else {
                 let userFetch:NSFetchRequest = User.fetchRequest()
                 let user = try! self.coreData.persistentContainer.viewContext.fetch(userFetch).first
                 
-                print("creating family")
-                
-                self.ref.child("family/\(self.familyTextField.text!)/members/").setValue(
-                    [Auth.auth().currentUser!.uid: "\(user!.firstName!) \(user!.lastName!)"]
-                )
+                self.ref.child("\(FirebaseConstants.FAMILY_PATH)/\(self.familyTextField.text!)/\(FirebaseConstants.MEMBERS_PATH)/").child(Auth.auth().currentUser!.uid)
+                    .setValue(["name": "\(user!.firstName!) \(user!.lastName!)"])
                 
                 user!.family = self.familyTextField.text!
                 self.coreData.saveContext()

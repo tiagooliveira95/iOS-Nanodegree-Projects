@@ -24,6 +24,8 @@ class LoginViewController: UIViewController {
 
     
     override func viewWillAppear(_ animated: Bool) {
+        loginButton.isEnabled = true
+
         let user = Auth.auth().currentUser
         if user != nil && !user!.isAnonymous {
             let userFetch:NSFetchRequest = User.fetchRequest()
@@ -74,7 +76,7 @@ class LoginViewController: UIViewController {
     }
         
     func retriveAndSaveUserData(){
-        Firestore.firestore().collection("users").document(Auth.auth().currentUser!.uid).getDocument{ (document,error) in
+        Firestore.firestore().collection(FirebaseConstants.USER_PATH).document(Auth.auth().currentUser!.uid).getDocument{ (document,error) in
             if let document = document {
                 let dataDescription = document.data() as! [String: String]
                 
@@ -82,6 +84,7 @@ class LoginViewController: UIViewController {
                 user.email = self.emailField.text!
                 user.firstName = dataDescription["firstName"]
                 user.lastName = dataDescription["lastName"]
+                user.family = dataDescription["family"]
                 self.coreData.saveContext()
                 self.dismiss(animated: false)
                 self.performSegue(withIdentifier: SeguesConstants.LoginToShoppingListSegue, sender: nil)

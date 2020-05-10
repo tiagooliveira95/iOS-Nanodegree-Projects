@@ -42,7 +42,7 @@ class RegisterViewController: UIViewController {
             userData.lastName = self.lastNameField.text!
 
             do{
-                try Firestore.firestore().collection("users").document(Auth.auth().currentUser!.uid)
+                try Firestore.firestore().collection(FirebaseConstants.USER_PATH).document(Auth.auth().currentUser!.uid)
                     .setData(from: userData) { err in
                         if let err = err {
                             print("Error writing document: \(err)")
@@ -53,6 +53,8 @@ class RegisterViewController: UIViewController {
                             user.email = self.emailField.text!
                             user.firstName = userData.firstName
                             user.lastName = userData.lastName
+                            user.family = ""
+
                             self.coreData.saveContext()
                             self.dismiss(animated: false)
                             self.performSegue(withIdentifier: SeguesConstants.LoginToShoppingListSegue, sender: nil)

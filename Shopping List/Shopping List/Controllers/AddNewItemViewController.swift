@@ -26,7 +26,7 @@ class AddNewItemViewController: UIViewController{
         let userFetch:NSFetchRequest = User.fetchRequest()
         let user = try! self.coreData.persistentContainer.viewContext.fetch(userFetch).first
         
-        self.ref.child("family/\(user!.family!)/items/").child(generateItemUID()).setValue(
+        self.ref.child("\(FirebaseConstants.FAMILY_PATH)/\(user!.family!)/\(FirebaseConstants.ITEMS_PATH)/").child(generateItemUID()).setValue(
                 [
                     "name" : itemTextField.text!,
                     "amount": amountTextField.text!

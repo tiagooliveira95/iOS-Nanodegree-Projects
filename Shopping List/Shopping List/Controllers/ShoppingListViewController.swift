@@ -35,28 +35,28 @@ class ShoppingListViewController: UIViewController, UITableViewDataSource, UITab
         
         let db = Database.database()
               ref = db.reference()
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(setFirebaseObserver(notification:)), name:NSNotification.Name(rawValue: "reload"), object: nil)
+     
+        NotificationCenter.default.addObserver(self, selector: #selector(setFirebaseObserver), name:NSNotification.Name(rawValue: "reload"), object: nil)
         
         //disable buttons if family is not found
-        if currentUser.family == nil {
+        if currentUser.family == nil || currentUser.family!.count <= 0 {
             self.newListButton.isEnabled = false
             self.settingsButton.isEnabled = false
             self.shoppingListTable.isHidden = true
             return
         }
         
+        print("family: " + currentUser.family!)
+        
         self.addFamilyButton.isHidden = true
         
         setFirebaseObserver()
     }
     
-    @objc func setFirebaseObserver(notification: NSNotification? = nil){
+    @objc func setFirebaseObserver(){
         currentUser = try! coreData.persistentContainer.viewContext.fetch(User.fetchRequest()).first
-
-        let family:String = notification?.userInfo!["family"] as? String ?? currentUser.family!
         
-        dbFamilyRef = ref.child("family/\(family)/items")
+        dbFamilyRef = ref.child("\(FirebaseConstants.FAMILY_PATH)/\(currentUser.family!)/\(FirebaseConstants.ITEMS_PATH)")
         dbFamilyRef.keepSynced(true)
         
         dbFamilyRef.observe(DataEventType.value, with: { (snapshot) in

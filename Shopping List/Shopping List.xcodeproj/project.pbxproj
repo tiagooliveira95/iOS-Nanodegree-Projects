@@ -21,6 +21,7 @@
 		E8D6897E2465BFAF000A27A2 /* ShoppingItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8D6897D2465BFAF000A27A2 /* ShoppingItem.swift */; };
 		E8D6898024662521000A27A2 /* ViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8D6897F24662521000A27A2 /* ViewControllerExtension.swift */; };
 		E8D6898224663D53000A27A2 /* AuthConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8D6898124663D53000A27A2 /* AuthConstants.swift */; };
+		E8D6898424678007000A27A2 /* FirebaseConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8D6898324678007000A27A2 /* FirebaseConstants.swift */; };
 		E8DE68412460FD0F00047D12 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8DE68402460FD0F00047D12 /* AppDelegate.swift */; };
 		E8DE68432460FD0F00047D12 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8DE68422460FD0F00047D12 /* SceneDelegate.swift */; };
 		E8DE68452460FD0F00047D12 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8DE68442460FD0F00047D12 /* ViewController.swift */; };
@@ -48,6 +49,7 @@
 		E8D6897D2465BFAF000A27A2 /* ShoppingItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingItem.swift; sourceTree = "<group>"; };
 		E8D6897F24662521000A27A2 /* ViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerExtension.swift; sourceTree = "<group>"; };
 		E8D6898124663D53000A27A2 /* AuthConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthConstants.swift; sourceTree = "<group>"; };
+		E8D6898324678007000A27A2 /* FirebaseConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseConstants.swift; sourceTree = "<group>"; };
 		E8DE683D2460FD0F00047D12 /* Shopping List.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Shopping List.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E8DE68402460FD0F00047D12 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E8DE68422460FD0F00047D12 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -104,6 +106,7 @@
 				E8D6896A2461DD4B000A27A2 /* SeguesConstants.swift */,
 				E8D6897B2464E8DE000A27A2 /* Identifiers.swift */,
 				E8D6898124663D53000A27A2 /* AuthConstants.swift */,
+				E8D6898324678007000A27A2 /* FirebaseConstants.swift */,
 			);
 			path = Constants;
 			sourceTree = "<group>";
@@ -290,6 +293,7 @@
 				E8DE68412460FD0F00047D12 /* AppDelegate.swift in Sources */,
 				E8D68971246229AF000A27A2 /* SetFamilyViewController.swift in Sources */,
 				E8D6896D246228D9000A27A2 /* ShoppingListViewController.swift in Sources */,
+				E8D6898424678007000A27A2 /* FirebaseConstants.swift in Sources */,
 				E8D689652461C456000A27A2 /* RegisterViewController.swift in Sources */,
 				E8DE685924611A2300047D12 /* LoginViewController.swift in Sources */,
 				E8DE68432460FD0F00047D12 /* SceneDelegate.swift in Sources */,
