@@ -109,7 +109,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="johnsons" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zpQ-Kf-blA">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="johnsons" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zpQ-Kf-blA">
                                 <rect key="frame" x="138" y="120" width="256" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.062810324129999998" green="0.6984155178" blue="0.89414423700000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -120,7 +120,6 @@
                         <constraints>
                             <constraint firstItem="zhh-7b-Mrz" firstAttribute="trailing" secondItem="zpQ-Kf-blA" secondAttribute="trailing" constant="20" id="1wp-qv-a0k"/>
                             <constraint firstItem="vVL-uy-xQU" firstAttribute="leading" secondItem="zhh-7b-Mrz" secondAttribute="leading" constant="20" id="D4o-Gb-hfP"/>
-                            <constraint firstItem="zhh-7b-Mrz" firstAttribute="trailing" secondItem="vVL-uy-xQU" secondAttribute="trailing" constant="284" id="HKZ-uf-XKl"/>
                             <constraint firstItem="zpQ-Kf-blA" firstAttribute="leading" secondItem="vVL-uy-xQU" secondAttribute="trailing" constant="8" id="Wlr-dP-AF2"/>
                             <constraint firstItem="vVL-uy-xQU" firstAttribute="top" secondItem="zhh-7b-Mrz" secondAttribute="top" constant="32" id="XW4-2T-Zg5"/>
                             <constraint firstItem="zpQ-Kf-blA" firstAttribute="top" secondItem="zhh-7b-Mrz" secondAttribute="top" constant="32" id="XjS-Gq-iIo"/>

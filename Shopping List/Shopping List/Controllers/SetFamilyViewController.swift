@@ -36,9 +36,9 @@ class SetFamilyViewController: UIViewController{
                             let userFetch:NSFetchRequest = User.fetchRequest()
                             let user = try! self.coreData.persistentContainer.viewContext.fetch(userFetch).first
                             
-                            self.ref.child("\(FirebaseConstants.FAMILY_PATH)/\(self.familyTextField.text!)/\(MEMBERS_PATH)/").child(Auth.auth().currentUser!.uid)
+                            self.ref.child("\(FirebaseConstants.FAMILY_PATH)/\(self.familyTextField.text!)/\(FirebaseConstants.MEMBERS_PATH)/").child(Auth.auth().currentUser!.uid)
                                 .setValue(["name": "\(user!.firstName!) \(user!.lastName!)"])
-                    
+
                             user?.family = self.familyTextField.text!
                             self.coreData.saveContext()
                             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "reload"), object: nil)
@@ -55,18 +55,21 @@ class SetFamilyViewController: UIViewController{
     
     @IBAction func createFamilyButtonClicked(_ sender: Any) {
         ref.child("family").child(familyTextField.text!).observeSingleEvent(of: .value, with: { (snapshot) in
-            //tell user that family already exists!
             if snapshot.exists() {
+                //tell user that family already exists
                 self.showUIAlert(title: "Error", message: "Family already exists", style: .alert, actions: [], viewController: nil)
             } else {
                 let userFetch:NSFetchRequest = User.fetchRequest()
                 let user = try! self.coreData.persistentContainer.viewContext.fetch(userFetch).first
                 
-                self.ref.child("\(FirebaseConstants.FAMILY_PATH)/\(self.familyTextField.text!)/\(FirebaseConstants.MEMBERS_PATH)/").child(Auth.auth().currentUser!.uid)
+                self.ref.child("\(FirebaseConstants.FAMILY_PATH)/\(self.familyTextField.text!)/\(FirebaseConstants.MEMBERS_PATH)/")
+                    .child(Auth.auth().currentUser!.uid)
                     .setValue(["name": "\(user!.firstName!) \(user!.lastName!)"])
                 
                 user!.family = self.familyTextField.text!
                 self.coreData.saveContext()
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "reload"), object: nil)
+                self.dismiss(animated: true)
             }
           }) { (error) in
             print("error: \(error.localizedDescription)")

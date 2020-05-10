@@ -35,30 +35,39 @@ class RegisterViewController: UIViewController {
             return
         }
         
-        self.showActivityLoadingIndicatorView("Creating account...")
+        self.showActivityLoadingIndicatorView("Creating account...", animated: false)
         Auth.auth().createUser(withEmail: emailField.text!, password: passwordField.text!) { authResult, error in
+            guard error == nil else {
+                self.dismiss(animated: false)
+                self.showUIAlert(title: "Error", message: error?.localizedDescription, style: .alert, actions: [], viewController: nil)
+                return
+            }
+            
             let userData = UserData()
             userData.firstName = self.firstNameField.text!
             userData.lastName = self.lastNameField.text!
 
+            
+            let uid = authResult!.user.uid
             do{
-                try Firestore.firestore().collection(FirebaseConstants.USER_PATH).document(Auth.auth().currentUser!.uid)
-                    .setData(from: userData) { err in
-                        if let err = err {
-                            print("Error writing document: \(err)")
-                            self.showUIAlert(title: "Error", message: err.localizedDescription, style: .alert, actions: [], viewController: nil)
-                        } else {
-                            print("Document successfully written!")
-                            let user = User(context: self.coreData.persistentContainer.viewContext)
-                            user.email = self.emailField.text!
-                            user.firstName = userData.firstName
-                            user.lastName = userData.lastName
-                            user.family = ""
-
-                            self.coreData.saveContext()
+                try Firestore.firestore().collection(FirebaseConstants.USER_PATH).document(uid)
+                        .setData(from: userData) { err in
                             self.dismiss(animated: false)
-                            self.performSegue(withIdentifier: SeguesConstants.LoginToShoppingListSegue, sender: nil)
-                        }
+
+                            if let err = err {
+                                print("Error writing document: \(err)")
+                                self.showUIAlert(title: "Error", message: err.localizedDescription, style: .alert, actions: [], viewController: nil)
+                            } else {
+                                print("Document successfully written!")
+                                let user = User(context: self.coreData.persistentContainer.viewContext)
+                                user.email = self.emailField.text!
+                                user.firstName = userData.firstName
+                                user.lastName = userData.lastName
+                                user.family = ""
+    
+                                self.coreData.saveContext()
+                                self.performSegue(withIdentifier: SeguesConstants.LoginToShoppingListSegue, sender: nil)
+                            }
                 }
             } catch {
                 self.dismiss(animated: true)

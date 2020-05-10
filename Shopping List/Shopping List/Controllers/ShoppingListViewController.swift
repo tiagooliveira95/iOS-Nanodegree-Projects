@@ -38,6 +38,7 @@ class ShoppingListViewController: UIViewController, UITableViewDataSource, UITab
      
         NotificationCenter.default.addObserver(self, selector: #selector(setFirebaseObserver), name:NSNotification.Name(rawValue: "reload"), object: nil)
         
+        print("family: \(currentUser?.family ?? "nil")")
         //disable buttons if family is not found
         if currentUser.family == nil || currentUser.family!.count <= 0 {
             self.newListButton.isEnabled = false
@@ -123,7 +124,7 @@ class ShoppingListViewController: UIViewController, UITableViewDataSource, UITab
                     self.shoppingListTable.deleteRows(at: [indexPath], with: .automatic)
                 }else {
                     //show error to user
-                    print("failed to delete")
+                    self.showUIAlert(title: "Error", message: "Error deliting item, please try again later", style: .alert, actions: [], viewController: nil)
                 }
                 self.buzy = false
             }
